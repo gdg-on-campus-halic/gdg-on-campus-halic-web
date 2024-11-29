@@ -56,7 +56,7 @@ export interface Event {
 
 #### team.ts
 
-Contains an array of team members with the following type definition:
+Contains an array of team members with the `TeamMember` type definition:
 
 ```typescript
 export type Variant = 'green' | 'blue' | 'red' | 'yellow';
