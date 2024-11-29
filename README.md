@@ -73,7 +73,7 @@ export interface TeamMember {
 
 #### socials.ts
 
-Exports some constants named `socials`, `campus` and `joinLink`.
+Exports some constants named `socials`, `campus` and `joinLink` for the information of your club.
 
 - `socials` constant exports your social media links like the following:
 
