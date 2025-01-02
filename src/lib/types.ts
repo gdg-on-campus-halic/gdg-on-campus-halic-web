@@ -1,4 +1,4 @@
-import { StaticImageData } from 'next/image';
+import { StaticImageData } from "next/image";
 
 export interface Event {
   bannerImage: StaticImageData;
@@ -11,7 +11,7 @@ export interface Event {
   location: string;
 }
 
-export type Variant = 'green' | 'blue' | 'red' | 'yellow';
+export type Variant = "green" | "blue" | "red" | "yellow";
 
 export interface TeamMember {
   avatar?: StaticImageData;
@@ -21,4 +21,5 @@ export interface TeamMember {
   variant: Variant;
   linkedinUrl?: string;
   instagramUsername?: string;
+  githubUsername?: string;
 }
