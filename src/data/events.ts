@@ -13,6 +13,7 @@ const importImages = (eventNumber: number) => {
       if (imageLoaded) break;
 
       try {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const image = require(`@/images/events/event-${eventNumber}/${i}${ext}`);
         images.push(image);
         imageLoaded = true;
