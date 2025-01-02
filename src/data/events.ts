@@ -1,17 +1,100 @@
 // data/events.ts
 import { Event } from '@/lib/types';
-import image1_1 from "@/images/events/event-1/1.jpeg"
-import image1_2 from "@/images/events/event-2/1.jpg"
-import image2_2 from "@/images/events/event-2/2.jpg"
-import image3_2 from "@/images/events/event-2/3.jpeg"
-import image4_2 from "@/images/events/event-2/4.jpeg"
-import image5_2 from "@/images/events/event-2/5.jpeg"
-import image6_2 from "@/images/events/event-2/6.jpg"
 
+// Function to dynamically import images based on event number
+const importImages = (eventNumber: number) => {
+  const images = [];
+  const extensions = ['.png', '.jpg', '.jpeg', '.JPG', '.heic']; // Desteklenen uzantılar
+
+  for (let i = 1; i <= 6; i++) {
+    let imageLoaded = false; 
+
+    for (const ext of extensions) {
+      if (imageLoaded) break;
+
+      try {
+        const image = require(`@/images/events/event-${eventNumber}/${i}${ext}`);
+        images.push(image);
+        imageLoaded = true;
+      } catch (error) {
+        // Hata durumunda hiçbir işlem yapma, diğer uzantıyı dene
+      }
+    }
+
+    if (!imageLoaded) {
+      console.error(`Error loading image for event-${eventNumber}, image ${i}: No valid extensions found.`);
+    }
+  }
+
+  return images;
+};
+
+
+// Define events with dynamic image imports
 export const events: Event[] = [
   {
-    bannerImage: image4_2,
-    images: [image1_2, image2_2, image3_2, image4_2, image5_2, image6_2],
+    bannerImage: importImages(8)[0], 
+    images: importImages(8),
+    title: 'AI Conference',
+    slug: "ai-conference",
+    description: "",
+    text: "",
+    date: 'December 4, 2024',
+    location: "Haliç University, Middle Garden"
+  },
+  {
+    bannerImage: importImages(7)[5], 
+    images: importImages(7),
+    title: 'Github 101',
+    slug: "github-101",
+    description: "",
+    text: "",
+    date: 'November 29, 2024',
+    location: "Haliç University, Event Hall"
+  },
+  {
+    bannerImage: importImages(6)[0], 
+    images: importImages(6),
+    title: 'Coffee Talks-1',
+    slug: "coffee-talks-1",
+    description: "",
+    text: "",
+    date: 'November 27, 2024',
+    location: "Haliç University, Terrace Cafe"
+  },
+  {
+    bannerImage: importImages(5)[0], 
+    images: importImages(5),
+    title: 'Python Crash Course',
+    slug: "python-crash-course",
+    description: "",
+    text: "",
+    date: 'October 30, 2024',
+    location: "Haliç University, Event Hall"
+  },
+  {
+    bannerImage: importImages(4)[0], 
+    images: importImages(4),
+    title: 'Project 101',
+    slug: "project-101",
+    description: "",
+    text: "",
+    date: 'October 14, 2024',
+    location: "Haliç University, Event Hall"
+  },
+  {
+    bannerImage: importImages(3)[0], 
+    images: importImages(3),
+    title: 'Welcome Fest',
+    slug: "welcome-fest",
+    description: "",
+    text: "",
+    date: 'October 11, 2024',
+    location: "Haliç University, Middle Garden"
+  },
+  {
+    bannerImage: importImages(2)[1], 
+    images: importImages(2),
     title: 'Info Session',
     slug: "info-session",
     description: "Our members, both new and returning, gathered to discuss Google technologies, share exciting future projects, play fun games, and enjoy a memorable start to the new semester!",
@@ -20,8 +103,8 @@ export const events: Event[] = [
     location: "Haliç University, Café Street"
   },
   {
-    bannerImage: image1_1,
-    images: [image1_1],
+    bannerImage: importImages(1)[0], 
+    images: importImages(1),
     title: 'Orientation Days',
     slug: "orientation-days",
     description: "The promotional and orientation days are events where we set up stands in the school's café street to meet new students and invite them to join our school life and clubs.",
@@ -30,4 +113,3 @@ export const events: Event[] = [
     location: "Haliç University, Café Street"
   }
 ];
-

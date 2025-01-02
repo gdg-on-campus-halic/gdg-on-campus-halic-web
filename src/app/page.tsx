@@ -1,6 +1,6 @@
 import Divider from "@/components/divider";
 import Image from "next/image";
-import banner from "@/images/banner.png";
+import logo from "@/images/gdglogo.png";
 import blueDivider from "@/images/dividers/blue-banner.png";
 import greenDivider from "@/images/dividers/green-banner.png";
 import TextContainer from "@/components/text-container";
@@ -83,7 +83,7 @@ export default function Home() {
       <div className="relative z-10">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-20">
           <div className="m-auto w-[80%] md:w-[70%] lg:w-[60%] h-auto my-auto">
-            <Image src={banner} alt="gdg-banner" />
+            <Image width={350} src={logo} alt="gdg-banner" className="mx-auto" />
             <div className="flex justify-center mt-4 space-x-4">
               <a
                 href={socials.instagram.url}

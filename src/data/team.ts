@@ -8,8 +8,17 @@ import mustafaeftekin from '@/images/team/mustafaeftekin.jpeg';
 import osmangurel from '@/images/team/osmangurel.jpg';
 import pelinuyanik from '@/images/team/pelinuyanik.jpeg';
 import serhanergul from '@/images/team/serhanergul.jpg';
-import tahagulbaz from '@/images/team/tahagulbaz.jpg';
-import tahayildirim from '@/images/team/tahayildirim.jpg';
+import gorkem from "@/images/team/Görkem Karyol.jpeg"
+import olivia from "@/images/team/Olivia Üzümcü.jpeg"
+import abdullah from "@/images/team/abdullah-eraslan.jpeg"
+import burcu from "@/images/team/burcu-aydin.jpeg"
+import elifk from "@/images/team/elif-karamehmet.jpeg"
+import elifb from "@/images/team/elif-o-bektas.jpeg"
+import hacer from "@/images/team/hacer-guney.jpeg"
+import irmak from "@/images/team/irmak-celik.jpeg"
+import melike from "@/images/team/melike-tekirdag.jpeg"
+import ömer from "@/images/team/ömer-savci.jpeg"
+import yahya from "@/images/team/yahya-sebti.jpeg"
 
 export const teamMembers: TeamMember[] = [
     {
@@ -28,20 +37,20 @@ export const teamMembers: TeamMember[] = [
         linkedinUrl: 'https://www.linkedin.com/in/furkanunsalan/',
         instagramUsername: "furkanunsalan"
     },
+    // Organization Team (Green Variant)
+    {
+        avatar: pelinuyanik,
+        name: "Pelin",
+        surname: "Uyanık",
+        title: "Organization Team Lead",
+        variant: "green",
+    },
     {
         avatar: mertparlak,
         name: 'Mert',
         surname: 'Parlak',
-        title: 'Secretary-General',
-        variant: 'red'
-    },
-    // Organization Team (Green Variant)
-    {
-        avatar: tahayildirim,
-        name: "Taha",
-        surname: "Yıldırım",
-        title: "Organization Team Lead",
-        variant: "green",
+        title: 'Organization Team',
+        variant: 'green'
     },
     {
         avatar: gamzesefer,
@@ -57,39 +66,50 @@ export const teamMembers: TeamMember[] = [
         title: "Organization Team",
         variant: "green",
     },
+    
     {
-        avatar: pelinuyanik,
-        name: "Pelin",
-        surname: "Uyanık",
-        title: "Organization Team",
-        variant: "green",
-    },
-    {
+        avatar: yahya,
         name: "Yahya",
         surname: "Sebti",
         title: "Organization Team",
         variant: "green",
     },
     {
+        avatar: ömer,
         name: "Ömer",
         surname: "Faruk",
         title: "Organization Team",
         variant: "green",
     },
     {
-        avatar: eliforsun,
-        name: "Elif Nas",
-        surname: "Örsün",
-        title: "Organization Team",
-        variant: "green",
-    },
-    {
+        avatar: elifb,
         name: "Elif Özge",
         surname: "Bektaş",
         title: "Organization Team",
         variant: "green",
     },
-  
+    {
+        avatar: elifk,
+        name: "Elif",
+        surname: "Karamehmet",
+        title: "Organization Team",
+        variant: "green",
+    },
+    {
+        avatar: abdullah,
+        name: "Abdullah Eraslan",
+        surname: "Bektaş",
+        title: "Organization Team",
+        variant: "green",
+    },
+    {
+        avatar: hacer,
+        name: "Hacer Güney",
+        surname: "Bektaş",
+        title: "Organization Team",
+        variant: "green",
+    },
+
     // Project Team (Blue Variant)
     {
         avatar: mustafaeftekin,
@@ -106,29 +126,52 @@ export const teamMembers: TeamMember[] = [
         variant: "blue",
     },
     {
-        avatar: tahagulbaz,
-        name: "Taha",
-        surname: "Gülbaz",
+        avatar: gorkem,
+        name: "Görkem",
+        surname: "Karyol",
         title: "Project Team",
+        variant: "blue",
+    },
+    {
+        avatar: eliforsun,
+        name: "Elif Nas",
+        surname: "Örsün",
+        title: "Organization Team",
         variant: "blue",
     },
   
     // Social Media and Design Team (Yellow Variant)
     {
+        avatar: irmak,
         name: "Irmak",
         surname: "Çelik",
         title: "Social Media Manager",
         variant: "yellow",
     },
     {
+        avatar: melike,
         name: "Melike",
         surname: "Tekirdağ",
         title: "Social Media and Design Team",
         variant: "yellow",
     },
     {
+        avatar: burcu,
         name: "Burcu",
         surname: "Aydın",
+        title: "Social Media and Design Team",
+        variant: "yellow",
+    },
+    {
+        name: "Beyzanur",
+        surname: "Elçi",
+        title: "Social Media and Design Team",
+        variant: "yellow",
+    },
+    {
+        avatar: olivia,
+        name: "Olivia",
+        surname: "Üzümcü",
         title: "Social Media and Design Team",
         variant: "yellow",
     },
