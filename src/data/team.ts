@@ -97,15 +97,15 @@ export const teamMembers: TeamMember[] = [
     },
     {
         avatar: abdullah,
-        name: "Abdullah Eraslan",
-        surname: "Bektaş",
+        name: "Abdullah",
+        surname: "Eraslan",
         title: "Organization Team",
         variant: "green",
     },
     {
         avatar: hacer,
-        name: "Hacer Güney",
-        surname: "Bektaş",
+        name: "Hacer",
+        surname: "Güney",
         title: "Organization Team",
         variant: "green",
     },
@@ -136,7 +136,7 @@ export const teamMembers: TeamMember[] = [
         avatar: eliforsun,
         name: "Elif Nas",
         surname: "Örsün",
-        title: "Organization Team",
+        title: "Project Team",
         variant: "blue",
     },
   
