@@ -119,6 +119,7 @@ export const teamMembers: TeamMember[] = [
     variant: "blue",
     linkedinUrl: "https://www.linkedin.com/in/eftekin/",
     instagramUsername: "eftekindev",
+    githubUsername: "eftekin",
   },
   {
     avatar: osmangurel,

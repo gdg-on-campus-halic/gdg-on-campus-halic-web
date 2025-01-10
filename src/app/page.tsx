@@ -83,7 +83,12 @@ export default function Home() {
       <div className="relative z-10">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-20">
           <div className="m-auto w-[80%] md:w-[70%] lg:w-[60%] h-auto my-auto">
-            <Image width={350} src={logo} alt="gdg-banner" className="mx-auto" />
+            <Image
+              width={350}
+              src={logo}
+              alt="gdg-banner"
+              className="mx-auto"
+            />
             <div className="flex justify-center mt-4 space-x-4">
               <a
                 href={socials.instagram.url}
@@ -129,10 +134,10 @@ export default function Home() {
             </TextContainer>
 
             <TextContainer title="Our Mission" variant="blue">
-              At Google Developer Groups on Campus {campus}, our mission is to foster a thriving
-              environment where students from all fields-whether they&apos;re
-              seasoned developers or complete beginners-can come together to
-              learn, build, and grow.
+              At Google Developer Groups on Campus {campus}, our mission is to
+              foster a thriving environment where students from all
+              fields-whether they&apos;re seasoned developers or complete
+              beginners-can come together to learn, build, and grow.
             </TextContainer>
 
             <TextContainer title="What We Do" variant="green">
@@ -185,6 +190,7 @@ export default function Home() {
                 variant={member.variant}
                 linkedinUrl={member.linkedinUrl ?? undefined}
                 instagramUsername={member.instagramUsername ?? undefined}
+                githubUsername={member.githubUsername ?? undefined}
               />
             </div>
           ))}
