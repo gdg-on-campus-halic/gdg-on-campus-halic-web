@@ -8,6 +8,7 @@ export interface Event {
   description: string;
   text: string;
   date: string;
+  term: string;
   location: string;
 }
 

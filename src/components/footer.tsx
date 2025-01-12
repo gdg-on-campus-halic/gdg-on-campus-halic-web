@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
 
         <div className="mb-4 md:mb-0">
           <h3 className="text-lg font-bold text-center mb-2">Quick Links</h3>
-          <ul className="text-center text-sm space-y-1">
+          <ul className="text-left text-sm space-y-1">
             <li>
               <a href="/" className="hover:underline">
                 Home
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
               href={socials.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-orange-700 hover:text-blue-800"
+              className="text-orange-700 hover:text-orange-600"
             >
               <FaInstagram size={48} />
             </a>

@@ -1,4 +1,3 @@
-// components/TeamMemberCard.tsx
 import Image from "next/image";
 import React from "react";
 import { StaticImageData } from "next/image"; // This is still needed to handle image type
@@ -54,7 +53,9 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
 
   return (
     <div
-      className={`w-64 h-72 rounded-lg shadow-lg p-6 text-center border ${colors.border} ${colors.bg}`}
+      className={`w-64 h-72 select-none rounded-lg shadow-lg p-6 text-center border ${colors.border} ${colors.bg} 
+  transition-all duration-300 ease-in-out 
+  hover:shadow-xl hover:-translate-y-2 hover:border-4 hover:cursor-default`}
     >
       {/* Avatar */}
       <div className="relative w-24 h-24 mx-auto mb-4">

@@ -8,8 +8,8 @@ import mustafaeftekin from "@/images/team/mustafaeftekin.jpeg";
 import osmangurel from "@/images/team/osmangurel.jpg";
 import pelinuyanik from "@/images/team/pelinuyanik.jpeg";
 import serhanergul from "@/images/team/serhanergul.jpg";
-import gorkem from "@/images/team/Görkem Karyol.jpeg";
-import olivia from "@/images/team/Olivia Üzümcü.jpeg";
+import gorkem from "@/images/team/gorkem-karyol.jpeg";
+import olivia from "@/images/team/olivia-uzumcu.jpeg";
 import abdullah from "@/images/team/abdullah-eraslan.jpeg";
 import burcu from "@/images/team/burcu-aydin.jpeg";
 import elifk from "@/images/team/elif-karamehmet.jpeg";
@@ -19,6 +19,7 @@ import irmak from "@/images/team/irmak-celik.jpeg";
 import melike from "@/images/team/melike-tekirdag.jpeg";
 import ömer from "@/images/team/ömer-savci.jpeg";
 import yahya from "@/images/team/yahya-sebti.jpeg";
+import beyza from "@/images/team/beyzanur-elci.jpeg"
 
 export const teamMembers: TeamMember[] = [
   {
@@ -26,14 +27,14 @@ export const teamMembers: TeamMember[] = [
     name: "Serhan",
     surname: "Ergül",
     title: "Organiser",
-    variant: "red",
+    variant: "yellow",
   },
   {
     avatar: furkanunsalan,
     name: "Furkan",
     surname: "Ünsalan",
     title: "Vice President",
-    variant: "red",
+    variant: "yellow",
     linkedinUrl: "https://www.linkedin.com/in/furkanunsalan/",
     instagramUsername: "furkanunsalan",
   },
@@ -116,7 +117,7 @@ export const teamMembers: TeamMember[] = [
     name: "Mustafa",
     surname: "Eftekin",
     title: "Project Team Lead",
-    variant: "blue",
+    variant: "red",
     linkedinUrl: "https://www.linkedin.com/in/eftekin/",
     instagramUsername: "eftekindev",
     githubUsername: "eftekin",
@@ -126,21 +127,21 @@ export const teamMembers: TeamMember[] = [
     name: "Osman Şener",
     surname: "Gürel",
     title: "Project Team",
-    variant: "blue",
+    variant: "red",
   },
   {
     avatar: gorkem,
     name: "Görkem",
     surname: "Karyol",
     title: "Project Team",
-    variant: "blue",
+    variant: "red",
   },
   {
     avatar: eliforsun,
     name: "Elif Nas",
     surname: "Örsün",
     title: "Project Team",
-    variant: "blue",
+    variant: "red",
   },
 
   // Social Media and Design Team (Yellow Variant)
@@ -149,33 +150,34 @@ export const teamMembers: TeamMember[] = [
     name: "Irmak",
     surname: "Çelik",
     title: "Social Media Manager",
-    variant: "yellow",
+    variant: "blue",
   },
   {
     avatar: melike,
     name: "Melike",
     surname: "Tekirdağ",
     title: "Social Media and Design Team",
-    variant: "yellow",
+    variant: "blue",
   },
   {
     avatar: burcu,
     name: "Burcu",
     surname: "Aydın",
     title: "Social Media and Design Team",
-    variant: "yellow",
+    variant: "blue",
   },
   {
+    avatar: beyza,
     name: "Beyzanur",
     surname: "Elçi",
     title: "Social Media and Design Team",
-    variant: "yellow",
+    variant: "blue",
   },
   {
     avatar: olivia,
     name: "Olivia",
     surname: "Üzümcü",
     title: "Social Media and Design Team",
-    variant: "yellow",
+    variant: "blue",
   },
 ];
