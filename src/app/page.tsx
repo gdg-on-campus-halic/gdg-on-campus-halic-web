@@ -16,7 +16,7 @@ import Divider from "@/components/divider";
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="absolute inset-0 z-0 pointer-events-none hidden md:block">
+      <div className="absolute inset-0 z-0 pointer-events-none hidden md:block opacity-10">
         {renderIcons()}
       </div>
       <div className="relative z-10">

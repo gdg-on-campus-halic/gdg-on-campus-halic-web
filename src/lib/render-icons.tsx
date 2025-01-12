@@ -35,7 +35,7 @@ const renderIcons = () => {
     return (
       <Icon
         key={index}
-        className="absolute opacity-10 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
           left: `${pos.left}vw`,
           top: `${pos.top}vh`,
