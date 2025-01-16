@@ -24,3 +24,8 @@ export interface TeamMember {
   instagramUsername?: string;
   githubUsername?: string;
 }
+
+export interface Video {
+  url: string;
+  title: string;
+}

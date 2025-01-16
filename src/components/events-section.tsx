@@ -38,33 +38,30 @@ const EventSection = ({ events }: { events: Event[] }) => {
               2024-2025
             </DropdownMenuItem>
             {/* Future terms can be added here */}
-            {/* <DropdownMenuItem onClick={() => setSelectedTerm('2025-2026')}>2025-2026</DropdownMenuItem> */}
+            <DropdownMenuItem onClick={() => setSelectedTerm("2025-2026")}>
+              2025-2026
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
       <div className="py-8 bg-gray-100">
-        <div className="flex justify-center">
-          <div className="flex flex-wrap space-x-4 justify-center w-full">
-            {rows.map((row, rowIndex) => (
-              <div
-                key={rowIndex}
-                className="flex w-full justify-center space-x-4"
-              >
-                {row.map((event: Event, eventIndex: number) => (
-                  <EventCard
-                    key={eventIndex}
-                    bannerImage={event.bannerImage}
-                    title={event.title}
-                    slug={event.slug}
-                    description={event.description}
-                    date={event.date}
-                  />
-                ))}
-              </div>
-            ))}
+        {rows.map((row: Event[], rowIndex: number) => (
+          <div key={rowIndex} className="flex justify-center">
+            <div className="flex flex-wrap space-x-4 justify-center w-full">
+              {row.map((event: Event, index: number) => (
+                <EventCard
+                  key={index}
+                  bannerImage={event.bannerImage}
+                  title={event.title}
+                  slug={event.slug}
+                  description={event.description}
+                  date={event.date}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+![og](src/images/og.png)
+
 # Google Developer Groups on Campus Website Template
 
 #### Created by [Furkan Ünsalan](https://github.com/furkanunsalan)
@@ -34,7 +36,8 @@ src/
 └── data/
     ├── events.ts
     ├── socials.ts
-    └── team.ts
+    ├── team.ts
+    └── video.ts
 ```
 
 #### events.ts
@@ -54,6 +57,23 @@ export interface Event {
 }
 ```
 
+#### socials.ts
+
+Exports some constants named `socials`, `campus` and `joinLink` for the information of your club.
+
+- `socials` constant exports your social media links like the following:
+
+```typescript
+socials.instagram.url
+socials.linkedin.url
+socials.github.url
+socials.discord.url
+```
+
+- `campus` exports a string with the name of your campus to use on footer and in-between pages.
+
+- `joinLink` exports a string which contains a link for your member application form etc.
+
 #### team.ts
 
 Contains an array of team members with the `TeamMember` type definition:
@@ -71,22 +91,16 @@ export interface TeamMember {
 }
 ```
 
-#### socials.ts
+#### video.ts
 
-Exports some constants named `socials`, `campus` and `joinLink` for the information of your club.
-
-- `socials` constant exports your social media links like the following:
+Contains an array of youtube videos with the `Video` type definition:
 
 ```typescript
-socials.instagram.url
-socials.linkedin.url
-socials.github.url
-socials.discord.url
+export interface Video {
+  url: string;
+  title: string;
+}
 ```
-
-- `campus` exports a string with the name of your campus to use on footer and in-between pages.
-
-- `joinLink` exports a string which contains a link for your member application form etc.
 
 ### Image Folder
 

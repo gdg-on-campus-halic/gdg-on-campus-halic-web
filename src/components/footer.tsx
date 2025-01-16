@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           <h3 className="text-lg font-bold text-center md:text-left mb-2">
             About Us
           </h3>
-          <p className="text-sm">
+          <p className="text-sm text-justify">
             We are Google Developer Groups on Campus {campus}, a vibrant
             community driven by technology, innovation, and collaboration. Our
             goal is to empower students through knowledge sharing and hands-on
@@ -28,8 +28,10 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mb-4 md:mb-0">
-          <h3 className="text-lg font-bold text-center mb-2">Quick Links</h3>
-          <ul className="text-left text-sm space-y-1">
+          <h3 className="text-lg font-bold text-center xl:text-left mb-2">
+            Quick Links
+          </h3>
+          <ul className="text-center xl:text-left text-sm space-y-1">
             <li>
               <a href="/" className="hover:underline">
                 Home

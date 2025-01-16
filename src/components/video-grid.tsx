@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
 
 const getYouTubeVideoId = (url: string): string | null => {
   const patterns = [
     /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/]+)/,
-    /^([^&?/]+)$/
+    /^([^&?/]+)$/,
   ];
 
   for (const pattern of patterns) {
@@ -30,9 +30,15 @@ const VideoGrid: React.FC<VideoGridProps> = ({ videos }) => {
     <div className="flex flex-wrap justify-center items-start py-4">
       <style jsx global>{`
         @keyframes gradient-rotate {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
         }
         .border-animation {
           background: linear-gradient(
@@ -50,18 +56,21 @@ const VideoGrid: React.FC<VideoGridProps> = ({ videos }) => {
 
       {videos.map((video, index) => {
         const videoId = getYouTubeVideoId(video.url);
-        const thumbnailUrl = videoId 
+        const thumbnailUrl = videoId
           ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-          : '/api/placeholder/320/180';
+          : "/api/placeholder/320/180";
 
         return (
-          <div key={index} className="flex-none w-[400px] mx-4 mb-8 relative group">
+          <div
+            key={index}
+            className="flex-none w-[300px] md:w-[400px] mx-4 mb-8 relative group "
+          >
             <div className="absolute -inset-0.5 rounded-lg blur opacity-30 transition duration-1000 group-hover:opacity-100 border-animation" />
             <Card className="relative bg-white overflow-hidden hover:shadow-lg transition-shadow duration-200">
               <CardContent className="p-0">
-                <a 
-                  href={video.url} 
-                  target="_blank" 
+                <a
+                  href={video.url}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="block"
                 >
