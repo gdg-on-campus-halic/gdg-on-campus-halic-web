@@ -19,7 +19,7 @@ import irmak from "@/images/team/irmak-celik.jpeg";
 import melike from "@/images/team/melike-tekirdag.jpeg";
 import ömer from "@/images/team/ömer-savci.jpeg";
 import yahya from "@/images/team/yahya-sebti.jpeg";
-import beyza from "@/images/team/beyzanur-elci.jpeg"
+import beyza from "@/images/team/beyzanur-elci.jpeg";
 
 export const teamMembers: TeamMember[] = [
   {
@@ -28,6 +28,8 @@ export const teamMembers: TeamMember[] = [
     surname: "Ergül",
     title: "Organiser",
     variant: "yellow",
+    githubUsername: "serhan2004",
+    linkedinUrl: "https://www.linkedin.com/in/serhan-ergül-204211206/",
   },
   {
     avatar: furkanunsalan,
@@ -37,6 +39,7 @@ export const teamMembers: TeamMember[] = [
     variant: "yellow",
     linkedinUrl: "https://www.linkedin.com/in/furkanunsalan/",
     instagramUsername: "furkanunsalan",
+    githubUsername: "furkanunsalan",
   },
   // Organization Team (Green Variant)
   {
@@ -45,6 +48,8 @@ export const teamMembers: TeamMember[] = [
     surname: "Uyanık",
     title: "Organization Team Lead",
     variant: "green",
+    linkedinUrl:
+      "https://www.linkedin.com/in/pelin-uyanık-79b1a9256/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   },
   {
     avatar: mertparlak,
@@ -59,6 +64,7 @@ export const teamMembers: TeamMember[] = [
     surname: "Sefer",
     title: "Organization Team",
     variant: "green",
+    instagramUsername: "gamzesfrr",
   },
   {
     avatar: gizemorhan,
@@ -66,6 +72,9 @@ export const teamMembers: TeamMember[] = [
     surname: "Orhan",
     title: "Organization Team",
     variant: "green",
+    linkedinUrl:
+      "https://www.linkedin.com/in/gizem-selin-orhan-b231b9247?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BMNbQMGVuSiiB3sQCVturgg%3D%3D",
+    instagramUsername: "gizems.orhan",
   },
 
   {
@@ -88,6 +97,8 @@ export const teamMembers: TeamMember[] = [
     surname: "Bektaş",
     title: "Organization Team",
     variant: "green",
+    linkedinUrl:
+      "https://www.linkedin.com/in/elif-özge-bektaş-72109728a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BWYvuEboLTKaAwLKjGWywpQ%3D%3D",
   },
   {
     avatar: elifk,
@@ -128,6 +139,9 @@ export const teamMembers: TeamMember[] = [
     surname: "Gürel",
     title: "Project Team",
     variant: "red",
+    linkedinUrl: "https://www.linkedin.com/in/osmansenergurel96/",
+    instagramUsername: "osnngrl",
+    githubUsername: "osnn96",
   },
   {
     avatar: gorkem,
@@ -135,6 +149,9 @@ export const teamMembers: TeamMember[] = [
     surname: "Karyol",
     title: "Project Team",
     variant: "red",
+    linkedinUrl: "https://www.linkedin.com/in/görkem-karyol-503abb280/",
+    instagramUsername: "jfglory",
+    githubUsername: "Glory42",
   },
   {
     avatar: eliforsun,
@@ -142,6 +159,8 @@ export const teamMembers: TeamMember[] = [
     surname: "Örsün",
     title: "Project Team",
     variant: "red",
+    instagramUsername: "eliforsn",
+    linkedinUrl: "https://www.linkedin.com/in/elif-nas-örsün/",
   },
 
   // Social Media and Design Team (Yellow Variant)
@@ -165,6 +184,7 @@ export const teamMembers: TeamMember[] = [
     surname: "Aydın",
     title: "Social Media and Design Team",
     variant: "blue",
+    instagramUsername: "burcu.ayddn",
   },
   {
     avatar: beyza,
@@ -172,6 +192,7 @@ export const teamMembers: TeamMember[] = [
     surname: "Elçi",
     title: "Social Media and Design Team",
     variant: "blue",
+    instagramUsername: "beyzanrelci",
   },
   {
     avatar: olivia,
@@ -179,5 +200,7 @@ export const teamMembers: TeamMember[] = [
     surname: "Üzümcü",
     title: "Social Media and Design Team",
     variant: "blue",
+    linkedinUrl: "https://www.linkedin.com/in/olivia-üzümcü-772237232/",
+    instagramUsername: "olivia_uzumcu",
   },
 ];
