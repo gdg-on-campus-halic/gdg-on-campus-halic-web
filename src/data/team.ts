@@ -57,6 +57,9 @@ export const teamMembers: TeamMember[] = [
     surname: "Parlak",
     title: "Organization Team",
     variant: "green",
+    githubUsername: "mertsparlak",
+    linkedinUrl: "https://www.linkedin.com/in/mert-parlak-751a141b0/",
+    instagramUsername: "merrtpaarlak",
   },
   {
     avatar: gamzesefer,
@@ -83,6 +86,7 @@ export const teamMembers: TeamMember[] = [
     surname: "Sebti",
     title: "Organization Team",
     variant: "green",
+    linkedinUrl: "https://www.linkedin.com/in/yahya-sebti-90946a340/",
   },
   {
     avatar: ömer,
@@ -113,6 +117,9 @@ export const teamMembers: TeamMember[] = [
     surname: "Eraslan",
     title: "Organization Team",
     variant: "green",
+    instagramUsername: "abdullahhw_",
+    linkedinUrl:
+      "https://www.linkedin.com/in/abdullah-eraslan-b183b5294/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   },
   {
     avatar: hacer,
@@ -170,6 +177,9 @@ export const teamMembers: TeamMember[] = [
     surname: "Çelik",
     title: "Social Media Manager",
     variant: "blue",
+    instagramUsername: "rmakclk",
+    linkedinUrl:
+      "https://www.linkedin.com/in/irmak-çelik-9b1b3028a/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   },
   {
     avatar: melike,
@@ -177,6 +187,10 @@ export const teamMembers: TeamMember[] = [
     surname: "Tekirdağ",
     title: "Social Media and Design Team",
     variant: "blue",
+    linkedinUrl:
+      "https://www.linkedin.com/in/melike-tekirdağ-949175259/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    githubUsername: "Meliketekirdag",
+    instagramUsername: "melike.trg63",
   },
   {
     avatar: burcu,
