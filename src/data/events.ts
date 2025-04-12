@@ -35,6 +35,42 @@ const importImages = (eventNumber: number) => {
 // Define events with dynamic image imports
 export const events: Event[] = [
   {
+    bannerImage: importImages(10)[0],
+    images: importImages(10),
+    title: "Cursor Workshop",
+    slug: "cursor-workshop",
+    description:
+      "Hand-on coding and 'vibe coding' workshop hosted in our university with the partnership of OnlyJS community.",
+    text: "",
+    date: "April 9, 2025",
+    term: "2024-2025",
+    location: "Haliç University, Event Hall",
+  },
+  {
+    bannerImage: importImages(11)[0],
+    images: importImages(11),
+    title: "GDG on Campus Meetup",
+    slug: "gdg-on-campus-meetup",
+    description:
+      "GDG on Campus İstanbul meetup hosted by E2VC in their office. A warm and playful event where we relaxed and had fun!",
+    text: "",
+    date: "March 27, 2025",
+    term: "2024-2025",
+    location: "E2VC Office",
+  },
+  {
+    bannerImage: importImages(9)[0],
+    images: importImages(9),
+    title: "Notion 101",
+    slug: "notion-101",
+    description:
+      "A wonderful event held together with Problem Solving Community and Notion Türkiye.",
+    text: "Take a look at the highlights from our 'Notion 101' event held on March 13th! During this special session, we not only gained theoretical knowledge but also had the opportunity to acquire hands-on experience. In our event, We listened to insightful presentations by Furkan and Omer Waseem. We explored everything you need to know about Notion and digital organization tools through practical demonstrations. Participants engaged in interactive sessions and Q&A discussions, fostering a valuable exchange of ideas. A huge thank you to Furkan for traveling to Haliç University and sharing his experiences with us. We are grateful to everyone who joined the event and to all the community members who supported us!",
+    date: "March 13, 2025",
+    term: "2024-2025",
+    location: "Haliç University, Event Hall",
+  },
+  {
     bannerImage: importImages(8)[0],
     images: importImages(8),
     title: "AI Conference",

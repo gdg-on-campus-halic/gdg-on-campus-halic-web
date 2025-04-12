@@ -37,10 +37,10 @@ const EventSection = ({ events }: { events: Event[] }) => {
             <DropdownMenuItem onClick={() => setSelectedTerm("2024-2025")}>
               2024-2025
             </DropdownMenuItem>
-            {/* Future terms can be added here */}
-            <DropdownMenuItem onClick={() => setSelectedTerm("2025-2026")}>
+            {/* Future terms can be added here like the following */}
+            {/* <DropdownMenuItem onClick={() => setSelectedTerm("2025-2026")}>
               2025-2026
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
