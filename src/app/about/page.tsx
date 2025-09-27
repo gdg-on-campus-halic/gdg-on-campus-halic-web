@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaArrowLeft, FaRocket, FaUsers, FaLightbulb, FaHeart } from "react-icons/fa";
 import SparklingBackground from "@/components/sparkling-background";
+import GoogleText from "@/components/google-text";
 import gdgLogo from "@/images/gdglogo.png";
 import { campus } from "@/data/socials";
 
@@ -103,7 +104,7 @@ export default function AboutPage() {
               />
             </div>
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Google Developer Groups on Campus
+              <GoogleText /> Developer Groups on Campus
             </h2>
             <p className="text-2xl text-orange-500 font-semibold">
               {campus}
@@ -116,7 +117,7 @@ export default function AboutPage() {
             className="max-w-4xl mx-auto mb-16 text-center"
           >
             <p className="text-lg text-gray-700 leading-relaxed">
-              Welcome to Google Developer Groups on Campus {campus}. As part of the global Google Developer Groups initiative, 
+              Welcome to <GoogleText /> Developer Groups on Campus {campus}. As part of the global <GoogleText /> Developer Groups initiative, 
               we are a vibrant and inclusive community of students passionate about technology, innovation, and collaboration. 
               Our community brings together developers, designers, and tech enthusiasts from all backgrounds.
             </p>

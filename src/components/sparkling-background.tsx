@@ -1,26 +1,152 @@
 // src/components/sparkling-background.tsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { icons } from '@/lib/bg-icons';
+
+// Icon overlay component for rendering actual React icons
+const TechIconsOverlay: React.FC = () => {
+  const [iconPositions, setIconPositions] = useState<Array<{x: number, y: number, icon: React.ComponentType, key: string, rotation: number}>>([]);
+  
+  useEffect(() => {
+    const generateIconPositions = () => {
+      const positions: Array<{x: number, y: number, icon: React.ComponentType, key: string, rotation: number}> = [];
+      const iconSize = 32; // Much bigger icons
+      const minDistance = 60; // Minimum distance between icons to prevent overlap
+      const maxAttempts = 1000; // Maximum attempts to place an icon
+      const maxIcons = Math.min(150, Math.floor((window.innerWidth * window.innerHeight) / (minDistance * minDistance * 2))); // Adaptive max icons based on screen size
+      
+      // Helper function to check if two circles overlap
+      const isOverlapping = (x1: number, y1: number, x2: number, y2: number, minDist: number) => {
+        const dx = x1 - x2;
+        const dy = y1 - y2;
+        return Math.sqrt(dx * dx + dy * dy) < minDist;
+      };
+      
+      let attempts = 0;
+      
+      while (positions.length < maxIcons && attempts < maxAttempts) {
+        const x = iconSize + Math.random() * (window.innerWidth - iconSize * 2);
+        const y = iconSize + Math.random() * (window.innerHeight - iconSize * 2);
+        const rotation = Math.random() * 360; // Random rotation 0-360 degrees
+        
+        // Check if this position overlaps with any existing icon
+        let overlaps = false;
+        for (const pos of positions) {
+          if (isOverlapping(x, y, pos.x, pos.y, minDistance)) {
+            overlaps = true;
+            break;
+          }
+        }
+        
+        if (!overlaps) {
+          const iconIndex = Math.floor(Math.random() * icons.length);
+          positions.push({
+            x,
+            y,
+            icon: icons[iconIndex],
+            key: `icon-${positions.length}`,
+            rotation
+          });
+        }
+        
+        attempts++;
+      }
+      
+      setIconPositions(positions);
+    };
+    
+    generateIconPositions();
+    
+    const handleResize = () => {
+      generateIconPositions();
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  return (
+    <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
+      {iconPositions.map(({ x, y, icon: Icon, key, rotation }) => (
+        <div
+          key={key}
+          className="absolute text-gray-600 text-3xl opacity-12 transform -translate-x-1/2 -translate-y-1/2"
+          style={{
+            left: `${x}px`,
+            top: `${y}px`,
+            transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
+          }}
+        >
+          <Icon />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const SparklingBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trailCanvasRef = useRef<HTMLCanvasElement>(null);
+  const gridCanvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const trailCanvas = trailCanvasRef.current;
-    if (!canvas || !trailCanvas) return;
+    const gridCanvas = gridCanvasRef.current;
+    if (!canvas || !trailCanvas || !gridCanvas) return;
 
     const ctx = canvas.getContext('2d');
     const trailCtx = trailCanvas.getContext('2d');
-    if (!ctx || !trailCtx) return;
+    const gridCtx = gridCanvas.getContext('2d');
+    if (!ctx || !trailCtx || !gridCtx) return;
 
     // Set canvas size to window size
     const setCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      trailCanvas.width = window.innerWidth;
-      trailCanvas.height = window.innerHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      
+      canvas.width = width;
+      canvas.height = height;
+      trailCanvas.width = width;
+      trailCanvas.height = height;
+      gridCanvas.width = width;
+      gridCanvas.height = height;
+      
+      // Draw the notebook grid on resize
+      drawNotebookGrid();
     };
+
+    // Function to draw the notebook grid pattern
+    const drawNotebookGrid = () => {
+      if (!gridCtx || !gridCanvas) return;
+      
+      gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
+      
+      const gridSize = 25; // Size of each grid square
+      const lineWidth = 1;
+      
+      gridCtx.strokeStyle = '#666666'; // Lighter grey color
+      gridCtx.lineWidth = lineWidth;
+      gridCtx.globalAlpha = 0.2; // Make it more subtle
+      
+      // Draw vertical lines
+      for (let x = 0; x <= gridCanvas.width; x += gridSize) {
+        gridCtx.beginPath();
+        gridCtx.moveTo(x, 0);
+        gridCtx.lineTo(x, gridCanvas.height);
+        gridCtx.stroke();
+      }
+      
+      // Draw horizontal lines
+      for (let y = 0; y <= gridCanvas.height; y += gridSize) {
+        gridCtx.beginPath();
+        gridCtx.moveTo(0, y);
+        gridCtx.lineTo(gridCanvas.width, y);
+        gridCtx.stroke();
+      }
+      
+      gridCtx.globalAlpha = 1; // Reset alpha
+    };
+
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
@@ -64,10 +190,9 @@ const SparklingBackground: React.FC = () => {
       maxLifetime: number;
       behavior: 'draw' | 'float';
       drawingActive: boolean;
-      drawingActive: boolean;
       fadeStartTime: number;
 
-      constructor() {
+      constructor(canvasWidth: number, canvasHeight: number) {
         // Start from random position for variety
         const startFromEdge = Math.random() > 0.3; // 70% chance to start from edge
         
@@ -75,25 +200,25 @@ const SparklingBackground: React.FC = () => {
           const side = Math.floor(Math.random() * 4);
           switch(side) {
             case 0: // top
-              this.x = Math.random() * canvas.width;
+              this.x = Math.random() * canvasWidth;
               this.y = 0;
               break;
             case 1: // right
-              this.x = canvas.width;
-              this.y = Math.random() * canvas.height;
+              this.x = canvasWidth;
+              this.y = Math.random() * canvasHeight;
               break;
             case 2: // bottom
-              this.x = Math.random() * canvas.width;
-              this.y = canvas.height;
+              this.x = Math.random() * canvasWidth;
+              this.y = canvasHeight;
               break;
             default: // left
               this.x = 0;
-              this.y = Math.random() * canvas.height;
+              this.y = Math.random() * canvasHeight;
           }
         } else {
           // Start from random position in canvas
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
+          this.x = Math.random() * canvasWidth;
+          this.y = Math.random() * canvasHeight;
         }
         
         this.lastX = this.x;
@@ -141,7 +266,7 @@ const SparklingBackground: React.FC = () => {
         this.fadeStartTime = this.maxLifetime - 120; // Start fading 2 seconds before death
       }
 
-      update() {
+      update(canvasWidth: number, canvasHeight: number) {
         this.lastX = this.x;
         this.lastY = this.y;
         
@@ -173,10 +298,10 @@ const SparklingBackground: React.FC = () => {
           this.y += this.speedY;
           
           // Bounce off edges softly
-          if (this.x < 50 || this.x > canvas.width - 50) {
+          if (this.x < 50 || this.x > canvasWidth - 50) {
             this.speedX *= -0.8;
           }
-          if (this.y < 50 || this.y > canvas.height - 50) {
+          if (this.y < 50 || this.y > canvasHeight - 50) {
             this.speedY *= -0.8;
           }
         }
@@ -190,8 +315,8 @@ const SparklingBackground: React.FC = () => {
         }
         
         // Check bounds for removal
-        if (this.x < -100 || this.x > canvas.width + 100 || 
-            this.y < -100 || this.y > canvas.height + 100) {
+        if (this.x < -100 || this.x > canvasWidth + 100 || 
+            this.y < -100 || this.y > canvasHeight + 100) {
           this.lifetime = this.maxLifetime + 1;
         }
       }
@@ -310,14 +435,14 @@ const SparklingBackground: React.FC = () => {
       // Spawn new particles
       particleSpawnTimer++;
       if (particleSpawnTimer >= particleSpawnInterval && particles.length < maxParticles) {
-        particles.push(new CrayonParticle());
+        particles.push(new CrayonParticle(canvas.width, canvas.height));
         particleSpawnTimer = 0;
       }
       
       // Update and draw particles
       for (let i = particles.length - 1; i >= 0; i--) {
         const particle = particles[i];
-        particle.update();
+        particle.update(canvas.width, canvas.height);
         particle.draw();
         
         if (particle.isDead()) {
@@ -331,7 +456,7 @@ const SparklingBackground: React.FC = () => {
     // Start with 2 particles
     for (let i = 0; i < 2; i++) {
       setTimeout(() => {
-        particles.push(new CrayonParticle());
+        particles.push(new CrayonParticle(canvas.width, canvas.height));
       }, i * 1000);
     }
 
@@ -346,17 +471,22 @@ const SparklingBackground: React.FC = () => {
 
   return (
     <>
+      {/* Tech icons overlay */}
+      <TechIconsOverlay />
+      {/* Grid canvas - notebook background */}
+      <canvas
+        ref={gridCanvasRef}
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-100"
+      />
       {/* Trail canvas */}
       <canvas
         ref={trailCanvasRef}
-        className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-        style={{ opacity: 0.7 }}
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-70"
       />
       {/* Main canvas for heads */}
       <canvas
         ref={canvasRef}
-        className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-        style={{ opacity: 1.0 }}
+        className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-100"
       />
     </>
   );

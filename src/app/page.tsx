@@ -70,8 +70,8 @@ export default function Home() {
     }
   };
 
-  // Enhanced button styles with better design
-  const buttonBaseStyle = "group relative px-12 py-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-2xl min-w-[240px] text-center overflow-hidden";
+  // Enhanced button styles with better design - white raised buttons
+  const buttonBaseStyle = "group relative px-12 py-6 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-2xl min-w-[240px] text-center overflow-hidden border border-gray-100";
   
   // Google colors gradient for join button - clean and modern approach
   const joinButtonStyle = "px-14 py-6 font-bold rounded-full shadow-2xl text-2xl text-white";
@@ -102,7 +102,7 @@ export default function Home() {
                 >
                   <Link href="/events" className={buttonBaseStyle}>
                     <span className="relative z-10">Events</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                   </Link>
                 </motion.div>
 
@@ -115,7 +115,7 @@ export default function Home() {
                 >
                   <Link href="/team" className={buttonBaseStyle}>
                     <span className="relative z-10">Team</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                   </Link>
                 </motion.div>
               </div>
@@ -149,16 +149,10 @@ export default function Home() {
                   href={joinLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative px-14 py-6 font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-2xl text-white inline-block overflow-hidden"
-                  style={{
-                    background: 'linear-gradient(90deg, #4285f4 0%, #4285f4 20%, #fbbc05 30%, #fbbc05 45%, #34a853 55%, #34a853 70%, #ea4335 80%, #ea4335 100%)'
-                  }}
+                  className="group relative px-14 py-6 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-2xl min-w-[240px] text-center overflow-hidden inline-block border border-gray-100"
                 >
                   <span className="relative z-10">Join Our Community</span>
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" 
-                       style={{
-                         background: 'linear-gradient(90deg, #3367d6 0%, #3367d6 20%, #e1a91a 30%, #e1a91a 45%, #2d8f47 55%, #2d8f47 70%, #d23419 80%, #d23419 100%)'
-                       }} />
+                  <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                 </a>
               </motion.div>
             </div>
@@ -175,7 +169,7 @@ export default function Home() {
                 >
                   <Link href="/videos" className={buttonBaseStyle}>
                     <span className="relative z-10">Videos</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                   </Link>
                 </motion.div>
 
@@ -188,7 +182,7 @@ export default function Home() {
                 >
                   <Link href="/about" className={buttonBaseStyle}>
                     <span className="relative z-10">About</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                    <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                   </Link>
                 </motion.div>
               </div>
@@ -224,9 +218,9 @@ export default function Home() {
                 variants={fadeInLeft}
                 transition={{ delay: 0.8 }}
               >
-                <Link href="/events" className="group relative px-8 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-xl text-center block overflow-hidden">
+                <Link href="/events" className="group relative px-8 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center block overflow-hidden border border-gray-100">
                   <span className="relative z-10">Events</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                 </Link>
               </motion.div>
 
@@ -236,9 +230,9 @@ export default function Home() {
                 variants={fadeInRight}
                 transition={{ delay: 0.8 }}
               >
-                <Link href="/team" className="group relative px-8 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-xl text-center block overflow-hidden">
+                <Link href="/team" className="group relative px-8 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center block overflow-hidden border border-gray-100">
                   <span className="relative z-10">Team</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                 </Link>
               </motion.div>
 
@@ -248,9 +242,9 @@ export default function Home() {
                 variants={fadeInLeft}
                 transition={{ delay: 1.2 }}
               >
-                <Link href="/videos" className="group relative px-8 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-xl text-center block overflow-hidden">
+                <Link href="/videos" className="group relative px-8 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center block overflow-hidden border border-gray-100">
                   <span className="relative z-10">Videos</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                 </Link>
               </motion.div>
 
@@ -260,9 +254,9 @@ export default function Home() {
                 variants={fadeInRight}
                 transition={{ delay: 1.2 }}
               >
-                <Link href="/about" className="group relative px-8 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-xl text-center block overflow-hidden">
+                <Link href="/about" className="group relative px-8 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center block overflow-hidden border border-gray-100">
                   <span className="relative z-10">About</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
                 </Link>
               </motion.div>
             </div>
@@ -279,16 +273,10 @@ export default function Home() {
                 href={joinLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-12 py-5 font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-xl text-white inline-block overflow-hidden"
-                style={{
-                  background: 'linear-gradient(90deg, #4285f4 0%, #4285f4 20%, #fbbc05 30%, #fbbc05 45%, #34a853 55%, #34a853 70%, #ea4335 80%, #ea4335 100%)'
-                }}
+                className="group relative px-12 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center overflow-hidden inline-block border border-gray-100"
               >
                 <span className="relative z-10">Join Our Community</span>
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" 
-                     style={{
-                       background: 'linear-gradient(90deg, #3367d6 0%, #3367d6 20%, #e1a91a 30%, #e1a91a 45%, #2d8f47 55%, #2d8f47 70%, #d23419 80%, #d23419 100%)'
-                     }} />
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
               </a>
             </motion.div>
           </div>
@@ -322,21 +310,21 @@ export default function Home() {
               variants={fadeInUp}
               transition={{ delay: 0.8 }}
             >
-              <Link href="/events" className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-xl text-center block w-full overflow-hidden">
+              <Link href="/events" className="group relative px-10 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center block w-full overflow-hidden border border-gray-100">
                 <span className="relative z-10">Events</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
               </Link>
-              <Link href="/team" className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-xl text-center block w-full overflow-hidden">
+              <Link href="/team" className="group relative px-10 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center block w-full overflow-hidden border border-gray-100">
                 <span className="relative z-10">Team</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
               </Link>
-              <Link href="/videos" className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-xl text-center block w-full overflow-hidden">
+              <Link href="/videos" className="group relative px-10 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center block w-full overflow-hidden border border-gray-100">
                 <span className="relative z-10">Videos</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
               </Link>
-              <Link href="/about" className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-xl text-center block w-full overflow-hidden">
+              <Link href="/about" className="group relative px-10 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-xl text-center block w-full overflow-hidden border border-gray-100">
                 <span className="relative z-10">About</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
               </Link>
             </motion.div>
 
@@ -351,16 +339,10 @@ export default function Home() {
                 href={joinLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative px-12 py-5 font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-lg text-white block text-center w-full overflow-hidden"
-                style={{
-                  background: 'linear-gradient(90deg, #4285f4 0%, #4285f4 20%, #fbbc05 30%, #fbbc05 45%, #34a853 55%, #34a853 70%, #ea4335 80%, #ea4335 100%)'
-                }}
+                className="group relative px-12 py-5 bg-white text-gray-900 font-bold rounded-2xl shadow-[0_8px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_35px_rgba(0,0,0,0.25)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-lg text-center block w-full overflow-hidden border border-gray-100"
               >
                 <span className="relative z-10">Join Our Community</span>
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" 
-                     style={{
-                       background: 'linear-gradient(90deg, #3367d6 0%, #3367d6 20%, #e1a91a 30%, #e1a91a 45%, #2d8f47 55%, #2d8f47 70%, #d23419 80%, #d23419 100%)'
-                     }} />
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
               </a>
             </motion.div>
           </div>

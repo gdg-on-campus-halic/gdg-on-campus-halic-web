@@ -91,6 +91,19 @@ html {
   .google-green {
     color: var(--google-green);
   }
+  
+  /* Custom opacity for background icons */
+  .opacity-12 {
+    opacity: 0.12;
+  }
+  
+  .opacity-20 {
+    opacity: 0.20;
+  }
+  
+  .opacity-25 {
+    opacity: 0.25;
+  }
 }
 
 /* Base styles for consistent typography */
