@@ -26,7 +26,7 @@ const colorVariants = {
     iconBg: "bg-red-500",
   },
   yellow: {
-    bg: "from-yellow-400 to-orange-500",
+    bg: "from-yellow-400 to-yellow-500",
     text: "text-white",
     border: "border-yellow-400",
     iconBg: "bg-yellow-500",
@@ -69,8 +69,8 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
             <Image
               src={avatar}
               alt={`${name} ${surname}`}
-              layout="fill"
-              objectFit="cover"
+              fill
+              className="object-cover"
             />
           </div>
           {/* Glow effect on hover */}

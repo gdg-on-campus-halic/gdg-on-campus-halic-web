@@ -35,15 +35,8 @@ export default function TeamPage() {
   };
 
   // Group team members by their role/team
-  const organizers = teamMembers.filter(m => 
-    m.title.toLowerCase().includes('organiser') || 
-    m.title.toLowerCase().includes('president')
-  );
-  const organizationTeam = teamMembers.filter(m => 
-    m.variant === 'green' && 
-    !m.title.toLowerCase().includes('organiser') && 
-    !m.title.toLowerCase().includes('president')
-  );
+  const leadership = teamMembers.filter(m => m.variant === 'yellow');
+  const organizationTeam = teamMembers.filter(m => m.variant === 'green');
   const projectTeam = teamMembers.filter(m => m.variant === 'red');
   const socialMediaTeam = teamMembers.filter(m => m.variant === 'blue');
 
@@ -117,14 +110,14 @@ export default function TeamPage() {
               Leadership
             </h3>
             <div className="flex flex-wrap justify-center gap-3">
-              {organizers.map((member, index) => (
+              {leadership.map((member, index) => (
                 <motion.div key={index} variants={fadeIn}>
                   <TeamMemberCard
                     avatar={member.avatar || placeholderAvatar}
                     name={member.name}
                     surname={member.surname}
                     title={member.title}
-                    variant="yellow"
+                    variant={member.variant}
                     linkedinUrl={member.linkedinUrl}
                     instagramUsername={member.instagramUsername}
                     githubUsername={member.githubUsername}
