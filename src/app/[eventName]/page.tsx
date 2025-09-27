@@ -1,6 +1,8 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import Link from "next/link";
+import { FaArrowLeft } from "react-icons/fa";
 import { events } from "@/data/events";
 import Image from "next/image";
 import { Event } from "@/lib/types";
@@ -49,6 +51,16 @@ const EventPage: React.FC = () => {
       animate="visible"
       variants={staggerContainer}
     >
+      <motion.div variants={fadeInUp} className="mb-6">
+        <Link 
+          href="/events" 
+          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium"
+        >
+          <FaArrowLeft className="text-sm" />
+          Back to Events
+        </Link>
+      </motion.div>
+
       <motion.div variants={fadeInUp}>
         <Title className="text-center mb-2">{event.title}</Title>
       </motion.div>

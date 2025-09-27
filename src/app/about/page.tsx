@@ -196,24 +196,14 @@ export default function AboutPage() {
             </div>
           </motion.div>
 
-          {/* Technologies section */}
+          {/* Credits section */}
           <motion.div 
             variants={fadeIn}
-            className="text-center py-12 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl"
+            className="text-center py-8 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl"
           >
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">
-              Technologies We Explore
-            </h3>
-            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-              {['Android', 'Web', 'Cloud', 'AI/ML', 'Flutter', 'Firebase', 'TensorFlow', 'Kubernetes', 'React', 'Node.js'].map((tech) => (
-                <span 
-                  key={tech}
-                  className="px-4 py-2 bg-white rounded-full shadow-md text-gray-700 font-medium hover:shadow-lg transition-shadow duration-300"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
+            <p className="text-sm text-gray-600">
+              This website was developed by <a href="https://furkanunsalan.dev" target="_blank" rel="noopener noreferrer" className="font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200">Furkan Ünsalan</a> & <a href="https://sarpowsky.github.io" target="_blank" rel="noopener noreferrer" className="font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200">Sarp Can Karaman</a>
+            </p>
           </motion.div>
         </motion.main>
       </div>
