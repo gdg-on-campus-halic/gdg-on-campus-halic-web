@@ -79,19 +79,19 @@ export default function Home() {
   const googleGradientAlt = "bg-gradient-to-r from-yellow-400 via-green-500 to-blue-500";
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="relative h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Sparkling background animation layer */}
       <SparklingBackground />
       
       {/* Main content container */}
-      <div className="relative z-10 min-h-screen flex flex-col justify-between p-4 md:p-8">
+      <div className="relative z-10 h-screen flex flex-col justify-center p-2 md:p-4">
         
         {/* Desktop Layout */}
-        <div className="hidden lg:flex flex-1 items-center justify-center">
-          <div className="max-w-7xl w-full relative h-[700px] flex flex-col justify-center">
+        <div className="hidden lg:flex items-center justify-center h-full">
+          <div className="max-w-6xl w-full relative h-[600px] flex flex-col justify-center">
             
             {/* Top row: Events (left) and Team (right) */}
-            <div className="absolute w-full z-20" style={{ top: '38%' }}>
+            <div className="absolute w-full z-20" style={{ top: '35%' }}>
               <div className="flex justify-between items-center">
                 <motion.div
                   initial="hidden"
@@ -127,13 +127,13 @@ export default function Home() {
                 initial="hidden"
                 animate="visible"
                 variants={logoAnimation}
-                className="mb-8"
+                className="mb-4"
               >
                 <Image
                   src={gdgLogo}
                   alt="GDG on Campus"
-                  width={400}
-                  height={400}
+                  width={320}
+                  height={320}
                   className="drop-shadow-2xl hover:drop-shadow-3xl transition-all duration-300"
                   priority
                 />
@@ -158,8 +158,8 @@ export default function Home() {
             </div>
 
             {/* Bottom row: Videos (left) and About (right) */}
-            <div className="absolute w-full z-20" style={{ bottom: '15%' }}>
-              <div className="flex justify-between items-center px-32">
+            <div className="absolute w-full z-20" style={{ bottom: '25%' }}>
+              <div className="flex justify-between items-center px-24">
                 <motion.div
                   initial="hidden"
                   animate="visible"
@@ -191,27 +191,27 @@ export default function Home() {
         </div>
 
         {/* Tablet Layout (md to lg) */}
-        <div className="hidden md:flex lg:hidden flex-1 items-center justify-center">
+        <div className="hidden md:flex lg:hidden items-center justify-center h-full">
           <div className="max-w-2xl w-full">
             {/* Logo at top */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={logoAnimation}
-              className="mb-8 text-center"
+              className="mb-4 text-center"
             >
               <Image
                 src={gdgLogo}
                 alt="GDG on Campus"
-                width={300}
-                height={300}
+                width={240}
+                height={240}
                 className="mx-auto drop-shadow-2xl"
                 priority
               />
             </motion.div>
 
             {/* 2x2 Grid for buttons */}
-            <div className="grid grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-2 gap-4 mb-6">
               <motion.div
                 initial="hidden"
                 animate="visible"
@@ -283,20 +283,20 @@ export default function Home() {
         </div>
 
         {/* Mobile Layout */}
-        <div className="flex md:hidden flex-1 items-center justify-center">
+        <div className="flex md:hidden items-center justify-center h-full">
           <div className="w-full max-w-sm">
             {/* Logo */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={logoAnimation}
-              className="mb-8 text-center"
+              className="mb-4 text-center"
             >
               <Image
                 src={gdgLogo}
                 alt="GDG on Campus"
-                width={250}
-                height={250}
+                width={200}
+                height={200}
                 className="mx-auto drop-shadow-2xl"
                 priority
               />
@@ -304,7 +304,7 @@ export default function Home() {
 
             {/* Navigation buttons in vertical stack */}
             <motion.div 
-              className="space-y-4 mb-6"
+              className="space-y-3 mb-4"
               initial="hidden"
               animate="visible"
               variants={fadeInUp}
@@ -349,19 +349,21 @@ export default function Home() {
         </div>
 
         {/* Bottom section: Social links and All Links - Desktop/Tablet only */}
-        <div className="hidden md:flex justify-between items-end mt-8">
-          {/* Social media icons */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-            transition={{ delay: 2.0 }}
-            className="flex space-x-6"
-          >
+        <div className="hidden md:block absolute bottom-4 left-4 right-4 z-30">
+          <div className="flex justify-between items-end">
+            {/* Social media icons */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUp}
+              transition={{ delay: 2.0 }}
+              className="flex space-x-6"
+            >
             <a
               href={socials.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our Instagram page"
               className="text-orange-600 hover:text-orange-700 transition-all duration-300 transform hover:scale-110"
             >
               <FaInstagram size={36} />
@@ -370,6 +372,7 @@ export default function Home() {
               href={socials.linkedin.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our LinkedIn page"
               className="text-blue-600 hover:text-blue-700 transition-all duration-300 transform hover:scale-110"
             >
               <FaLinkedin size={36} />
@@ -378,33 +381,35 @@ export default function Home() {
               href={socials.github.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our GitHub page"
               className="text-gray-700 hover:text-gray-900 transition-all duration-300 transform hover:scale-110"
             >
               <FaGithub size={36} />
             </a>
-          </motion.div>
+            </motion.div>
 
-          {/* All Links button */}
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-            transition={{ delay: 2.0 }}
-          >
-            <a
-              href={joinLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-3 px-8 py-4 bg-gray-800 text-white rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl text-lg font-medium"
+            {/* All Links button */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUp}
+              transition={{ delay: 2.0 }}
             >
-              <FaLink size={24} />
-              <span>All Links</span>
-            </a>
-          </motion.div>
+              <a
+                href={joinLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 px-8 py-4 bg-gray-800 text-white rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl text-lg font-medium"
+              >
+                <FaLink size={24} />
+                <span>All Links</span>
+              </a>
+            </motion.div>
+          </div>
         </div>
 
         {/* Mobile Social Links - Centered at bottom */}
-        <div className="flex md:hidden justify-center mt-8">
+        <div className="flex md:hidden justify-center absolute bottom-4 left-0 right-0 z-30">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -416,6 +421,7 @@ export default function Home() {
               href={socials.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our Instagram page"
               className="text-orange-600"
             >
               <FaInstagram size={32} />
@@ -424,6 +430,7 @@ export default function Home() {
               href={socials.linkedin.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our LinkedIn page"
               className="text-blue-600"
             >
               <FaLinkedin size={32} />
@@ -432,6 +439,7 @@ export default function Home() {
               href={socials.github.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Visit our GitHub page"
               className="text-gray-700"
             >
               <FaGithub size={32} />
