@@ -53,27 +53,32 @@ export default function TeamPage() {
       <SparklingBackground />
       
       <div className="relative z-10">
-        {/* Header */}
+        {/* Header - Enhanced glass-morphism design */}
         <motion.header
           initial="hidden"
           animate="visible"
           variants={fadeIn}
-          className="bg-white shadow-md sticky top-0 z-20"
+          className="backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] sticky top-0 z-20 border-b border-white/20"
         >
           <div className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-6">
                 <Link
                   href="/"
-                  className="flex items-center space-x-2 text-orange-500 hover:text-orange-600 transition-colors duration-300"
+                  className="group flex items-center space-x-3 px-4 py-2 bg-white/60 backdrop-blur-sm text-black hover:text-white hover:bg-gradient-to-r hover:from-gray-800 hover:to-black transition-all duration-500 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 border border-gray-200/50"
                 >
-                  <FaArrowLeft size={20} />
-                  <span className="font-medium">Back to Home</span>
+                  <FaArrowLeft size={18} className="transition-transform duration-300 group-hover:-translate-x-1" />
+                  <span className="font-semibold">Back to Home</span>
                 </Link>
-                <div className="h-6 w-px bg-gray-300" />
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                <div className="h-8 w-px bg-gradient-to-b from-gray-300 to-gray-400 opacity-60" />
+                <motion.h1 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                  className="text-4xl font-bold bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent drop-shadow-sm"
+                >
                   Our Team
-                </h1>
+                </motion.h1>
               </div>
             </div>
           </div>
@@ -92,7 +97,13 @@ export default function TeamPage() {
             className="text-center mb-12 max-w-3xl mx-auto"
           >
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Meet Our <span className="text-orange-500">Amazing Team</span>
+              Meet Our{" "}
+              <span className="text-4xl font-bold">
+                <span className="text-[#4285F4]">T</span>
+                <span className="text-[#EA4335]">e</span>
+                <span className="text-[#FBBC05]">a</span>
+                <span className="text-[#34A853]">m</span>
+              </span>
             </h2>
             <p className="text-gray-600 text-lg">
               Passionate students working together to build a vibrant tech community. 
@@ -199,7 +210,7 @@ export default function TeamPage() {
           {/* Join the team CTA */}
           <motion.div 
             variants={fadeIn}
-            className="text-center py-12 bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl mt-16"
+            className="text-center py-12 backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-2xl mt-16 border border-white/20"
           >
             <h3 className="text-2xl font-bold text-gray-800 mb-4">
               Want to Join Our Team?
@@ -212,9 +223,10 @@ export default function TeamPage() {
               href="https://linktr.ee/GDGonCampusHalic"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:shadow-xl transition-all duration-300 shadow-lg hover:scale-105"
+              className="group relative px-8 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.5),_0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.7),_0_15px_40px_rgba(0,0,0,0.3)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 border border-white overflow-hidden inline-block"
             >
-              Apply Now
+              <span className="relative z-10">Apply Now</span>
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
             </a>
           </motion.div>
         </motion.main>

@@ -55,27 +55,32 @@ export default function AboutPage() {
       <SparklingBackground />
       
       <div className="relative z-10">
-        {/* Header with navigation */}
+        {/* Header with navigation - Enhanced glass-morphism design */}
         <motion.header
           initial="hidden"
           animate="visible"
           variants={fadeIn}
-          className="bg-white shadow-md sticky top-0 z-20"
+          className="backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] sticky top-0 z-20 border-b border-white/20"
         >
           <div className="container mx-auto px-4 py-6">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-6">
                 <Link
                   href="/"
-                  className="flex items-center space-x-2 text-orange-500 hover:text-orange-600 transition-colors duration-300"
+                  className="group flex items-center space-x-3 px-4 py-2 bg-white/60 backdrop-blur-sm text-black hover:text-white hover:bg-gradient-to-r hover:from-gray-800 hover:to-black transition-all duration-500 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 border border-gray-200/50"
                 >
-                  <FaArrowLeft size={20} />
-                  <span className="font-medium">Back to Home</span>
+                  <FaArrowLeft size={18} className="transition-transform duration-300 group-hover:-translate-x-1" />
+                  <span className="font-semibold">Back to Home</span>
                 </Link>
-                <div className="h-6 w-px bg-gray-300" />
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                <div className="h-8 w-px bg-gradient-to-b from-gray-300 to-gray-400 opacity-60" />
+                <motion.h1 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                  className="text-4xl font-bold bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent drop-shadow-sm"
+                >
                   About Us
-                </h1>
+                </motion.h1>
               </div>
             </div>
           </div>
@@ -106,9 +111,15 @@ export default function AboutPage() {
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
               <GoogleText /> Developer Groups on Campus
             </h2>
-            <p className="text-2xl text-orange-500 font-semibold">
-              {campus}
-            </p>
+            <div className="relative inline-block">
+              {/* Multiple layered blurred ellipses to create splash effect that covers full text */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-6 bg-indigo-950/45 rounded-full blur-2xl -z-10"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-5 bg-indigo-900/55 rounded-full blur-xl -z-10"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-4 bg-indigo-800/65 rounded-full blur-lg -z-10"></div>
+              <p className="relative text-2xl text-white font-semibold tracking-wide drop-shadow-xl px-3 py-1">
+                {campus}
+              </p>
+            </div>
           </motion.div>
 
           {/* Introduction section */}
