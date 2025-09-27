@@ -73,9 +73,10 @@ export default function Home() {
   // Enhanced button styles with better design
   const buttonBaseStyle = "group relative px-12 py-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-2xl min-w-[240px] text-center overflow-hidden";
   
-  // Google colors gradient for join button with all colors clearly visible
-  const joinButtonStyle = "group relative px-14 py-6 font-bold rounded-full shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 text-2xl text-white overflow-hidden";
-  const googleGradient = "bg-gradient-to-r from-blue-500 via-green-500 via-yellow-500 via-red-500 to-blue-500";
+  // Google colors gradient for join button - clean and modern approach
+  const joinButtonStyle = "px-14 py-6 font-bold rounded-full shadow-2xl text-2xl text-white";
+  const googleGradient = "bg-gradient-to-r from-blue-500 via-red-500 to-yellow-400";
+  const googleGradientAlt = "bg-gradient-to-r from-yellow-400 via-green-500 to-blue-500";
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
@@ -148,10 +149,16 @@ export default function Home() {
                   href={joinLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${joinButtonStyle} ${googleGradient} bg-[length:200%_100%] hover:bg-[length:100%_100%]`}
+                  className="group relative px-14 py-6 font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-2xl text-white inline-block overflow-hidden"
+                  style={{
+                    background: 'linear-gradient(90deg, #4285f4 0%, #4285f4 20%, #fbbc05 30%, #fbbc05 45%, #34a853 55%, #34a853 70%, #ea4335 80%, #ea4335 100%)'
+                  }}
                 >
                   <span className="relative z-10">Join Our Community</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" 
+                       style={{
+                         background: 'linear-gradient(90deg, #3367d6 0%, #3367d6 20%, #e1a91a 30%, #e1a91a 45%, #2d8f47 55%, #2d8f47 70%, #d23419 80%, #d23419 100%)'
+                       }} />
                 </a>
               </motion.div>
             </div>
@@ -272,10 +279,16 @@ export default function Home() {
                 href={joinLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group px-12 py-5 font-bold rounded-full shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 text-xl text-white bg-gradient-to-r from-blue-500 via-green-500 via-yellow-500 via-red-500 to-blue-500 bg-[length:200%_100%] hover:bg-[length:100%_100%] inline-block overflow-hidden relative"
+                className="group relative px-12 py-5 font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-xl text-white inline-block overflow-hidden"
+                style={{
+                  background: 'linear-gradient(90deg, #4285f4 0%, #4285f4 20%, #fbbc05 30%, #fbbc05 45%, #34a853 55%, #34a853 70%, #ea4335 80%, #ea4335 100%)'
+                }}
               >
                 <span className="relative z-10">Join Our Community</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" 
+                     style={{
+                       background: 'linear-gradient(90deg, #3367d6 0%, #3367d6 20%, #e1a91a 30%, #e1a91a 45%, #2d8f47 55%, #2d8f47 70%, #d23419 80%, #d23419 100%)'
+                     }} />
               </a>
             </motion.div>
           </div>
@@ -338,10 +351,16 @@ export default function Home() {
                 href={joinLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group px-12 py-5 font-bold rounded-full shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 text-xl text-white bg-gradient-to-r from-blue-500 via-green-500 via-yellow-500 via-red-500 to-blue-500 bg-[length:200%_100%] hover:bg-[length:100%_100%] block text-center w-full overflow-hidden relative"
+                className="group relative px-12 py-5 font-bold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 text-lg text-white block text-center w-full overflow-hidden"
+                style={{
+                  background: 'linear-gradient(90deg, #4285f4 0%, #4285f4 20%, #fbbc05 30%, #fbbc05 45%, #34a853 55%, #34a853 70%, #ea4335 80%, #ea4335 100%)'
+                }}
               >
                 <span className="relative z-10">Join Our Community</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" 
+                     style={{
+                       background: 'linear-gradient(90deg, #3367d6 0%, #3367d6 20%, #e1a91a 30%, #e1a91a 45%, #2d8f47 55%, #2d8f47 70%, #d23419 80%, #d23419 100%)'
+                     }} />
               </a>
             </motion.div>
           </div>

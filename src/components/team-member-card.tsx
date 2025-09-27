@@ -57,30 +57,29 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
   const colors = colorVariants[variant];
 
   return (
-    <div className="group relative w-40 h-52 transform transition-all duration-500 hover:-translate-y-1 hover:scale-105">
+    <div className="group relative w-40 h-52">
       {/* Card container with gradient background - even smaller */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} rounded-lg opacity-90 group-hover:opacity-100 transition-opacity duration-300`} />
+      <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} rounded-lg opacity-90 group-hover:opacity-100`} />
       
       {/* Content container */}
       <div className="relative h-full p-3 flex flex-col items-center justify-center text-center">
         {/* Avatar with border effect - bigger photo relative to card */}
-        <div className="relative mb-2 transform transition-transform duration-500 group-hover:scale-110">
+        <div className="relative mb-2">
           <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-white/30 shadow-lg">
             <Image
               src={avatar}
               alt={`${name} ${surname}`}
               layout="fill"
               objectFit="cover"
-              className="transition-transform duration-500 group-hover:scale-110"
             />
           </div>
           {/* Glow effect on hover */}
-          <div className="absolute inset-0 rounded-full bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 rounded-full bg-white/20 blur-lg opacity-0 group-hover:opacity-100" />
         </div>
         
         {/* Name and title - compact text */}
         <div className="mb-2">
-          <h3 className={`text-sm font-bold ${colors.text} leading-tight transition-all duration-300`}>
+          <h3 className={`text-sm font-bold ${colors.text} leading-tight`}>
             {name} {surname}
           </h3>
           <p className={`text-xs ${colors.text} opacity-90 mt-0.5`}>
@@ -95,7 +94,7 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
               aria-label={`${name} ${surname} LinkedIn`}
             >
               <FaLinkedin className="text-white text-xs" />
@@ -107,7 +106,7 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
               href={`https://instagram.com/${instagramUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
               aria-label={`${name} ${surname} Instagram`}
             >
               <FaInstagram className="text-white text-xs" />
@@ -119,7 +118,7 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
               href={`https://github.com/${githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
               aria-label={`${name} ${surname} GitHub`}
             >
               <FaGithub className="text-white text-xs" />
@@ -129,8 +128,8 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
       </div>
       
       {/* Decorative elements */}
-      <div className="absolute -top-1 -right-1 w-4 h-4 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <div className="absolute -bottom-1 -left-1 w-6 h-6 bg-white/10 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute -top-1 -right-1 w-4 h-4 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100" />
+      <div className="absolute -bottom-1 -left-1 w-6 h-6 bg-white/10 rounded-full blur-lg opacity-0 group-hover:opacity-100" />
     </div>
   );
 };
