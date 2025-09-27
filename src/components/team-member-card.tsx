@@ -1,30 +1,35 @@
+// src/components/team-member-card.tsx
 import Image from "next/image";
 import React from "react";
-import { StaticImageData } from "next/image"; // This is still needed to handle image type
-import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa"; // Ensure this import is correct
-import { Variant } from "@/lib/types"; // Importing types from the correct location
+import { StaticImageData } from "next/image";
+import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
+import { Variant } from "@/lib/types";
 
-// Define color classes based on the variant
+// Updated color variants with Google-inspired colors
 const colorVariants = {
   green: {
-    bg: "bg-green-100",
-    text: "text-green-700",
+    bg: "from-green-400 to-green-600",
+    text: "text-white",
     border: "border-green-400",
+    iconBg: "bg-green-500",
   },
   blue: {
-    bg: "bg-blue-100",
-    text: "text-blue-700",
+    bg: "from-blue-400 to-blue-600",
+    text: "text-white",
     border: "border-blue-400",
+    iconBg: "bg-blue-500",
   },
   red: {
-    bg: "bg-red-100",
-    text: "text-red-700",
+    bg: "from-red-400 to-red-600",
+    text: "text-white",
     border: "border-red-400",
+    iconBg: "bg-red-500",
   },
   yellow: {
-    bg: "bg-yellow-100",
-    text: "text-yellow-700",
+    bg: "from-yellow-400 to-orange-500",
+    text: "text-white",
     border: "border-yellow-400",
+    iconBg: "bg-yellow-500",
   },
 };
 
@@ -33,10 +38,10 @@ interface TeamMemberProps {
   name: string;
   surname: string;
   title: string;
-  variant: Variant; // Use Variant from the types
-  linkedinUrl?: string; // Add optional LinkedIn URL prop
-  instagramUsername?: string; // Add optional Instagram URL prop
-  githubUsername?: string; // Ensure this prop is correctly passed
+  variant: Variant;
+  linkedinUrl?: string;
+  instagramUsername?: string;
+  githubUsername?: string;
 }
 
 const TeamMemberCard: React.FC<TeamMemberProps> = ({
@@ -47,71 +52,85 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
   variant,
   linkedinUrl,
   instagramUsername,
-  githubUsername, // Ensure this prop is correctly passed
+  githubUsername,
 }) => {
-  const colors = colorVariants[variant]; // Get the color styles based on the variant
+  const colors = colorVariants[variant];
 
   return (
-    <div
-      className={`w-64 h-72 select-none rounded-lg shadow-lg p-6 text-center border ${colors.border} ${colors.bg} 
-  transition-all duration-300 ease-in-out 
-  hover:shadow-xl hover:-translate-y-2 hover:border-4 hover:cursor-default`}
-    >
-      {/* Avatar */}
-      <div className="relative w-24 h-24 mx-auto mb-4">
-        <Image
-          src={avatar}
-          alt={`${name} ${surname}`}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-full"
-        />
+    <div className="group relative w-40 h-52 transform transition-all duration-500 hover:-translate-y-1 hover:scale-105">
+      {/* Card container with gradient background - even smaller */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} rounded-lg opacity-90 group-hover:opacity-100 transition-opacity duration-300`} />
+      
+      {/* Content container */}
+      <div className="relative h-full p-3 flex flex-col items-center justify-center text-center">
+        {/* Avatar with border effect - bigger photo relative to card */}
+        <div className="relative mb-2 transform transition-transform duration-500 group-hover:scale-110">
+          <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-white/30 shadow-lg">
+            <Image
+              src={avatar}
+              alt={`${name} ${surname}`}
+              layout="fill"
+              objectFit="cover"
+              className="transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
+          {/* Glow effect on hover */}
+          <div className="absolute inset-0 rounded-full bg-white/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        </div>
+        
+        {/* Name and title - compact text */}
+        <div className="mb-2">
+          <h3 className={`text-sm font-bold ${colors.text} leading-tight transition-all duration-300`}>
+            {name} {surname}
+          </h3>
+          <p className={`text-xs ${colors.text} opacity-90 mt-0.5`}>
+            {title}
+          </p>
+        </div>
+        
+        {/* Social media buttons with glass effect - compact */}
+        <div className="flex justify-center space-x-1 mt-auto">
+          {linkedinUrl && (
+            <a
+              href={linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+              aria-label={`${name} ${surname} LinkedIn`}
+            >
+              <FaLinkedin className="text-white text-xs" />
+            </a>
+          )}
+          
+          {instagramUsername && (
+            <a
+              href={`https://instagram.com/${instagramUsername}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+              aria-label={`${name} ${surname} Instagram`}
+            >
+              <FaInstagram className="text-white text-xs" />
+            </a>
+          )}
+          
+          {githubUsername && (
+            <a
+              href={`https://github.com/${githubUsername}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+              aria-label={`${name} ${surname} GitHub`}
+            >
+              <FaGithub className="text-white text-xs" />
+            </a>
+          )}
+        </div>
       </div>
-      {/* Name & Surname */}
-      <h2 className={`text-xl font-semibold ${colors.text}`}>
-        {name} {surname}
-      </h2>
-      {/* Title */}
-      <p className={`text-sm mt-2 ${colors.text}`}>{title}</p>
-
-      {/* Social Media Buttons */}
-      <div className="flex justify-center space-x-2 mt-4">
-        {/* LinkedIn Button */}
-        {linkedinUrl && (
-          <a
-            href={linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 bg-blue-600 flex justify-center items-center rounded hover:bg-blue-700 transition-colors"
-          >
-            <FaLinkedin className="text-white" />
-          </a>
-        )}
-
-        {/* Instagram Button */}
-        {instagramUsername && (
-          <a
-            href={`https://instagram.com/${instagramUsername}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 flex justify-center items-center rounded hover:opacity-90 transition-opacity"
-          >
-            <FaInstagram className="text-white" />
-          </a>
-        )}
-
-        {/* Github Button */}
-        {githubUsername && (
-          <a
-            href={`https://github.com/${githubUsername}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 bg-gray-800 flex justify-center items-center rounded hover:bg-gray-900 transition-colors"
-          >
-            <FaGithub className="text-white" />
-          </a>
-        )}
-      </div>
+      
+      {/* Decorative elements */}
+      <div className="absolute -top-1 -right-1 w-4 h-4 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute -bottom-1 -left-1 w-6 h-6 bg-white/10 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </div>
   );
 };
