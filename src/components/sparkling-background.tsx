@@ -9,12 +9,11 @@ const TechIconsOverlay: React.FC = () => {
   useEffect(() => {
     const generateIconPositions = () => {
       const positions: Array<{x: number, y: number, icon: React.ComponentType, key: string, rotation: number}> = [];
-      const iconSize = 32; // Much bigger icons
-      const minDistance = 60; // Minimum distance between icons to prevent overlap
-      const maxAttempts = 1000; // Maximum attempts to place an icon
-      const maxIcons = Math.min(150, Math.floor((window.innerWidth * window.innerHeight) / (minDistance * minDistance * 2))); // Adaptive max icons based on screen size
+      const iconSize = 32;
+      const minDistance = 60;
+      const maxAttempts = 1000;
+      const maxIcons = Math.min(150, Math.floor((window.innerWidth * window.innerHeight) / (minDistance * minDistance * 2)));
       
-      // Helper function to check if two circles overlap
       const isOverlapping = (x1: number, y1: number, x2: number, y2: number, minDist: number) => {
         const dx = x1 - x2;
         const dy = y1 - y2;
@@ -26,9 +25,8 @@ const TechIconsOverlay: React.FC = () => {
       while (positions.length < maxIcons && attempts < maxAttempts) {
         const x = iconSize + Math.random() * (window.innerWidth - iconSize * 2);
         const y = iconSize + Math.random() * (window.innerHeight - iconSize * 2);
-        const rotation = Math.random() * 360; // Random rotation 0-360 degrees
+        const rotation = Math.random() * 360;
         
-        // Check if this position overlaps with any existing icon
         let overlaps = false;
         for (const pos of positions) {
           if (isOverlapping(x, y, pos.x, pos.y, minDistance)) {
@@ -121,12 +119,12 @@ const SparklingBackground: React.FC = () => {
       
       gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
       
-      const gridSize = 25; // Size of each grid square
+      const gridSize = 25;
       const lineWidth = 1;
       
-      gridCtx.strokeStyle = '#666666'; // Lighter grey color
+      gridCtx.strokeStyle = '#666666';
       gridCtx.lineWidth = lineWidth;
-      gridCtx.globalAlpha = 0.2; // Make it more subtle
+      gridCtx.globalAlpha = 0.2;
       
       // Draw vertical lines
       for (let x = 0; x <= gridCanvas.width; x += gridSize) {
@@ -144,7 +142,7 @@ const SparklingBackground: React.FC = () => {
         gridCtx.stroke();
       }
       
-      gridCtx.globalAlpha = 1; // Reset alpha
+      gridCtx.globalAlpha = 1;
     };
 
     setCanvasSize();
@@ -171,14 +169,13 @@ const SparklingBackground: React.FC = () => {
     }
     const trailHistory: TrailSegment[] = [];
 
-    // Crayon particle class - can draw lines or float randomly
+    // Crayon particle class - simple and performant
     class CrayonParticle {
       x: number;
       y: number;
       lastX: number;
       lastY: number;
       size: number;
-      sizeType: 'small' | 'medium' | 'large';
       color: string;
       speedX: number;
       speedY: number;
@@ -188,13 +185,12 @@ const SparklingBackground: React.FC = () => {
       angleSpeed: number;
       lifetime: number;
       maxLifetime: number;
-      behavior: 'draw' | 'float';
       drawingActive: boolean;
       fadeStartTime: number;
 
       constructor(canvasWidth: number, canvasHeight: number) {
-        // Start from random position for variety
-        const startFromEdge = Math.random() > 0.3; // 70% chance to start from edge
+        // Start from random position
+        const startFromEdge = Math.random() > 0.3;
         
         if (startFromEdge) {
           const side = Math.floor(Math.random() * 4);
@@ -216,7 +212,6 @@ const SparklingBackground: React.FC = () => {
               this.y = Math.random() * canvasHeight;
           }
         } else {
-          // Start from random position in canvas
           this.x = Math.random() * canvasWidth;
           this.y = Math.random() * canvasHeight;
         }
@@ -224,97 +219,63 @@ const SparklingBackground: React.FC = () => {
         this.lastX = this.x;
         this.lastY = this.y;
         
-        // Three distinct crayon sizes
-        const sizeRandom = Math.random();
-        if (sizeRandom < 0.33) {
-          this.sizeType = 'small';
-          this.size = 3;
-          this.opacity = Math.random() * 0.15 + 0.1;
-        } else if (sizeRandom < 0.67) {
-          this.sizeType = 'medium';
-          this.size = 6;
-          this.opacity = Math.random() * 0.2 + 0.15;
-        } else {
-          this.sizeType = 'large';
-          this.size = 10;
-          this.opacity = Math.random() * 0.25 + 0.2;
-        }
-        
-        // Behavior type
-        this.behavior = 'draw';
+        // Random size
+        this.size = 3 + Math.random() * 7;
+        this.opacity = Math.random() * 0.15 + 0.1;
         
         this.color = googleColors[Math.floor(Math.random() * googleColors.length)];
-        this.drawingActive = this.behavior === 'draw';
+        this.drawingActive = true;
         
-        // Random speeds based on size and behavior
-        if (this.sizeType === 'small') {
-          this.baseSpeed = Math.random() * 1.0 + 0.5;
-        } else if (this.sizeType === 'medium') {
-          this.baseSpeed = Math.random() * 0.8 + 0.4;
-        } else {
-          this.baseSpeed = Math.random() * 0.6 + 0.3;
-        }
+        // Random speed - increased for more movement
+        this.baseSpeed = Math.random() * 1.2 + 0.5; // Increased from 0.8 + 0.4
         
         const randomAngle = Math.random() * Math.PI * 2;
         this.speedX = Math.cos(randomAngle) * this.baseSpeed;
         this.speedY = Math.sin(randomAngle) * this.baseSpeed;
         
         this.angle = randomAngle;
-        this.angleSpeed = (Math.random() - 0.5) * 0.02;
+        this.angleSpeed = (Math.random() - 0.5) * 0.03; // Increased from 0.02
         this.lifetime = 0;
-        this.maxLifetime = Math.random() * 600 + 400; // 400-1000 frames
-        this.fadeStartTime = this.maxLifetime - 120; // Start fading 2 seconds before death
+        this.maxLifetime = Math.random() * 600 + 400;
+        this.fadeStartTime = this.maxLifetime - 120;
       }
 
       update(canvasWidth: number, canvasHeight: number) {
         this.lastX = this.x;
         this.lastY = this.y;
         
-        if (this.behavior === 'draw') {
-          // Drawing behavior - smooth lines
-          this.angle += this.angleSpeed;
-          this.angle += (Math.random() - 0.5) * 0.05;
-          
-          this.speedX = Math.cos(this.angle) * this.baseSpeed;
-          this.speedY = Math.sin(this.angle) * this.baseSpeed;
-          
-          this.x += this.speedX;
-          this.y += this.speedY;
-          
-          // Randomly stop/start drawing
-          if (Math.random() < 0.02) {
-            this.drawingActive = !this.drawingActive;
-          }
-        } else if (this.behavior === 'float') {
-          // Floating behavior - random movement
-          this.speedX += (Math.random() - 0.5) * 0.2;
-          this.speedY += (Math.random() - 0.5) * 0.2;
-          
-          // Limit speed
-          this.speedX *= 0.95;
-          this.speedY *= 0.95;
-          
-          this.x += this.speedX;
-          this.y += this.speedY;
-          
-          // Bounce off edges softly
-          if (this.x < 50 || this.x > canvasWidth - 50) {
-            this.speedX *= -0.8;
-          }
-          if (this.y < 50 || this.y > canvasHeight - 50) {
-            this.speedY *= -0.8;
-          }
+        // More dynamic curved movement
+        this.angle += this.angleSpeed;
+        this.angle += (Math.random() - 0.5) * 0.08; // Increased from 0.05
+        
+        // Add occasional direction changes
+        if (Math.random() < 0.01) {
+          this.angleSpeed = (Math.random() - 0.5) * 0.04; // More variation
+        }
+        
+        // Add sine wave movement for more organic paths
+        const waveInfluence = Math.sin(this.lifetime * 0.05) * 0.2;
+        
+        this.speedX = Math.cos(this.angle + waveInfluence) * this.baseSpeed;
+        this.speedY = Math.sin(this.angle + waveInfluence) * this.baseSpeed;
+        
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        // More frequent stop/start drawing
+        if (Math.random() < 0.03) { // Increased from 0.02
+          this.drawingActive = !this.drawingActive;
         }
         
         this.lifetime++;
         
-        // Fade out effect for particles nearing death
+        // Fade out effect
         if (this.lifetime > this.fadeStartTime) {
           const fadeProgress = (this.lifetime - this.fadeStartTime) / 120;
           this.opacity *= (1 - fadeProgress * 0.02);
         }
         
-        // Check bounds for removal
+        // Check bounds
         if (this.x < -100 || this.x > canvasWidth + 100 || 
             this.y < -100 || this.y > canvasHeight + 100) {
           this.lifetime = this.maxLifetime + 1;
@@ -325,7 +286,7 @@ const SparklingBackground: React.FC = () => {
         if (!ctx || !trailCtx || this.opacity <= 0) return;
         
         // Draw trail if drawing is active
-        if (this.behavior === 'draw' && this.drawingActive) {
+        if (this.drawingActive) {
           // Add to trail history
           trailHistory.push({
             x1: this.lastX,
@@ -339,27 +300,47 @@ const SparklingBackground: React.FC = () => {
           });
         }
         
-        // Draw particle head with fade effect
+        // Draw arrow head with same texture as lines
         if (ctx) {
           ctx.save();
           
-          // Calculate head opacity based on lifetime
-          let headOpacity = 1.0;
+          // Calculate head opacity
+          let headOpacity = 0.8;
           if (this.lifetime > this.fadeStartTime) {
             const fadeProgress = (this.lifetime - this.fadeStartTime) / 120;
-            headOpacity = Math.max(0, 1 - fadeProgress);
+            headOpacity = Math.max(0, 0.8 - fadeProgress);
           }
           
-          ctx.globalAlpha = headOpacity;
-          ctx.fillStyle = this.color;
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = this.color;
+          ctx.globalAlpha = headOpacity * this.opacity;
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = this.size;
+          ctx.lineCap = 'round';
+          
+          // Arrow head size matches line radius
+          const headSize = this.size;
+          const angle = Math.atan2(this.speedY, this.speedX);
+          
+          // Position arrow head forward of the current position
+          const forwardDistance = this.size * 2;
+          const headX = this.x + Math.cos(angle) * forwardDistance;
+          const headY = this.y + Math.sin(angle) * forwardDistance;
+          
+          // Draw arrow head with dashed lines for texture
+          ctx.setLineDash([this.size * 2, this.size * 0.5]);
+          
+          ctx.translate(headX, headY);
+          ctx.rotate(angle);
+          
+          // Draw arrow with strokes instead of fill
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(-headSize * 1.5, -headSize * 0.8);
+          ctx.stroke();
           
           ctx.beginPath();
-          const headSize = this.size * 1.2;
-          
-          ctx.arc(this.x, this.y, headSize, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(-headSize * 1.5, headSize * 0.8);
+          ctx.stroke();
           
           ctx.restore();
         }
@@ -372,9 +353,9 @@ const SparklingBackground: React.FC = () => {
 
     // Particle management
     const particles: CrayonParticle[] = [];
-    const maxParticles = 10; // Particle intensity
+    const maxParticles = 13; // Increased by 25%
     let particleSpawnTimer = 0;
-    const particleSpawnInterval = 100; // Spawn Interval in frames
+    const particleSpawnInterval = 75; // Decreased by 25% for faster spawning
     
     // Animation loop
     let animationId: number;
@@ -385,7 +366,7 @@ const SparklingBackground: React.FC = () => {
       // Clear trail canvas for redrawing
       trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
       
-      // Draw trail history with fade out
+      // Draw trail history with texture
       const now = Date.now();
       const fadeTime = 20000; // 20 seconds
       
@@ -394,34 +375,37 @@ const SparklingBackground: React.FC = () => {
         const age = now - segment.timestamp;
         
         if (age > fadeTime) {
-          // Remove old segments
           trailHistory.splice(i, 1);
           continue;
         }
         
         // Calculate fade
         const fadeFactor = age > fadeTime - 3000 ? 
-          (fadeTime - age) / 3000 : 1; // Fade during last 3 seconds
+          (fadeTime - age) / 3000 : 1;
         
+        // Draw line with slight texture
         trailCtx.save();
         trailCtx.globalAlpha = segment.opacity * fadeFactor * 0.6;
         trailCtx.strokeStyle = segment.color;
         trailCtx.lineWidth = segment.size;
         trailCtx.lineCap = 'round';
         
+        // Set line dash for texture effect
+        trailCtx.setLineDash([segment.size * 2, segment.size * 0.5]);
+        
         trailCtx.beginPath();
         trailCtx.moveTo(segment.x1, segment.y1);
         trailCtx.lineTo(segment.x2, segment.y2);
         trailCtx.stroke();
         
-        // Add texture dots occasionally
-        if (Math.random() > 0.9) {
+        // Add some dots for texture
+        if (Math.random() > 0.7) {
           trailCtx.fillStyle = segment.color;
           trailCtx.globalAlpha = segment.opacity * fadeFactor * 0.3;
           trailCtx.beginPath();
           trailCtx.arc(
-            segment.x2 + (Math.random() - 0.5) * segment.size * 2,
-            segment.y2 + (Math.random() - 0.5) * segment.size * 2,
+            segment.x2 + (Math.random() - 0.5) * segment.size,
+            segment.y2 + (Math.random() - 0.5) * segment.size,
             Math.random() * 2,
             0,
             Math.PI * 2
@@ -453,11 +437,11 @@ const SparklingBackground: React.FC = () => {
       animationId = requestAnimationFrame(animate);
     };
 
-    // Start with 2 particles
-    for (let i = 0; i < 2; i++) {
+    // Start with 3 particles
+    for (let i = 0; i < 3; i++) {
       setTimeout(() => {
         particles.push(new CrayonParticle(canvas.width, canvas.height));
-      }, i * 1000);
+      }, i * 800); // Slightly faster initial spawn
     }
 
     animate();
