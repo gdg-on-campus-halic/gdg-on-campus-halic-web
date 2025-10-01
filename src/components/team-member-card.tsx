@@ -5,31 +5,27 @@ import { StaticImageData } from "next/image";
 import { FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 import { Variant } from "@/lib/types";
 
-// Updated color variants with Google-inspired colors
+// Solid Google color variants for team roles
 const colorVariants = {
   green: {
-    bg: "from-green-400 to-green-600",
+    bg: "bg-[#34A853]",
     text: "text-white",
-    border: "border-green-400",
-    iconBg: "bg-green-500",
+    border: "border-[#34A853]",
   },
   blue: {
-    bg: "from-blue-400 to-blue-600",
+    bg: "bg-[#4285F4]",
     text: "text-white",
-    border: "border-blue-400",
-    iconBg: "bg-blue-500",
+    border: "border-[#4285F4]",
   },
   red: {
-    bg: "from-red-400 to-red-600",
+    bg: "bg-[#EA4335]",
     text: "text-white",
-    border: "border-red-400",
-    iconBg: "bg-red-500",
+    border: "border-[#EA4335]",
   },
   yellow: {
-    bg: "from-yellow-400 to-yellow-500",
+    bg: "bg-[#FBBC04]",
     text: "text-white",
-    border: "border-yellow-400",
-    iconBg: "bg-yellow-500",
+    border: "border-[#FBBC04]",
   },
 };
 
@@ -57,28 +53,27 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
   const colors = colorVariants[variant];
 
   return (
-    <div className="group relative w-40 h-52">
-      {/* Card container with gradient background - even smaller */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${colors.bg} rounded-lg opacity-90 group-hover:opacity-100`} />
+    <div className="relative w-44 h-56">
+      {/* Card container with solid background color - no hover effects */}
+      <div className={`absolute inset-0 ${colors.bg} rounded-lg shadow-md`} />
       
       {/* Content container */}
       <div className="relative h-full p-3 flex flex-col items-center justify-center text-center">
-        {/* Avatar with border effect - bigger photo relative to card */}
-        <div className="relative mb-2">
-          <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-white/30 shadow-lg">
+        {/* Bigger rounded avatar - no animations */}
+        <div className="mb-3">
+          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white/40 shadow-lg">
             <Image
               src={avatar}
               alt={`${name} ${surname}`}
-              fill
-              className="object-cover"
+              width={96}
+              height={96}
+              className="object-cover w-full h-full"
             />
           </div>
-          {/* Glow effect on hover */}
-          <div className="absolute inset-0 rounded-full bg-white/20 blur-lg opacity-0 group-hover:opacity-100" />
         </div>
         
-        {/* Name and title - compact text */}
-        <div className="mb-2">
+        {/* Name and title */}
+        <div className="mb-3">
           <h3 className={`text-sm font-bold ${colors.text} leading-tight`}>
             {name} {surname}
           </h3>
@@ -87,17 +82,17 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
           </p>
         </div>
         
-        {/* Social media buttons with glass effect - compact */}
-        <div className="flex justify-center space-x-1 mt-auto">
+        {/* Social media buttons - static, no hover animations */}
+        <div className="flex justify-center space-x-1.5 mt-auto">
           {linkedinUrl && (
             <a
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
+              className="w-7 h-7 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
               aria-label={`${name} ${surname} LinkedIn`}
             >
-              <FaLinkedin className="text-white text-xs" />
+              <FaLinkedin className="text-white text-sm" />
             </a>
           )}
           
@@ -106,10 +101,10 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
               href={`https://instagram.com/${instagramUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
+              className="w-7 h-7 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
               aria-label={`${name} ${surname} Instagram`}
             >
-              <FaInstagram className="text-white text-xs" />
+              <FaInstagram className="text-white text-sm" />
             </a>
           )}
           
@@ -118,18 +113,14 @@ const TeamMemberCard: React.FC<TeamMemberProps> = ({
               href={`https://github.com/${githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-6 h-6 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
+              className="w-7 h-7 bg-white/20 backdrop-blur-sm flex justify-center items-center rounded hover:bg-white/30"
               aria-label={`${name} ${surname} GitHub`}
             >
-              <FaGithub className="text-white text-xs" />
+              <FaGithub className="text-white text-sm" />
             </a>
           )}
         </div>
       </div>
-      
-      {/* Decorative elements */}
-      <div className="absolute -top-1 -right-1 w-4 h-4 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100" />
-      <div className="absolute -bottom-1 -left-1 w-6 h-6 bg-white/10 rounded-full blur-lg opacity-0 group-hover:opacity-100" />
     </div>
   );
 };

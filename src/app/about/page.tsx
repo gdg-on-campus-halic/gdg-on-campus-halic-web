@@ -11,14 +11,14 @@ import gdgLogo from "@/images/gdglogo.png";
 import { campus } from "@/data/socials";
 
 export default function AboutPage() {
-  // Animation variants for smooth transitions
+  // Animation variants with faster transitions
   const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.3, // Reduced from 0.6
         ease: "easeOut"
       }
     }
@@ -29,8 +29,8 @@ export default function AboutPage() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
+        staggerChildren: 0.08, // Reduced from 0.15
+        delayChildren: 0.1 // Reduced from 0.2
       }
     }
   };
@@ -55,43 +55,93 @@ export default function AboutPage() {
       <SparklingBackground />
       
       <div className="relative z-10">
-        {/* Header with navigation - Enhanced glass-morphism design */}
-        <motion.header
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-          className="backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] sticky top-0 z-20 border-b border-white/20"
-        >
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-6">
+        {/* Compact navigation bar - no animations, transparent background */}
+        <div className="container mx-auto px-4 pt-4">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex justify-center items-center mb-6">
+            <div className="flex gap-2 p-2">
+              <Link
+                href="/"
+                className="group relative px-6 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm overflow-hidden border border-gray-100"
+              >
+                <span className="relative z-10 flex items-center">
+                  <FaArrowLeft className="mr-2" size={14} />
+                  Home
+                </span>
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
+              </Link>
+
+              <Link
+                href="/events"
+                className="group relative px-6 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm overflow-hidden border border-gray-100"
+              >
+                <span className="relative z-10">Events</span>
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
+              </Link>
+
+              <Link
+                href="/team"
+                className="group relative px-6 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm overflow-hidden border border-gray-100"
+              >
+                <span className="relative z-10">Team</span>
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
+              </Link>
+
+              <Link
+                href="/videos"
+                className="group relative px-6 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm overflow-hidden border border-gray-100"
+              >
+                <span className="relative z-10">Videos</span>
+                <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile Navigation - Centered with scrollable overflow */}
+          <div className="md:hidden flex justify-center items-center mb-6">
+            <div className="overflow-x-auto max-w-full">
+              <div className="flex gap-2 px-2">
                 <Link
                   href="/"
-                  className="group flex items-center space-x-3 px-4 py-2 bg-white/60 backdrop-blur-sm text-black hover:text-white hover:bg-gradient-to-r hover:from-gray-800 hover:to-black transition-all duration-500 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 border border-gray-200/50"
+                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
                 >
-                  <FaArrowLeft size={18} className="transition-transform duration-300 group-hover:-translate-x-1" />
-                  <span className="font-semibold">Back to Home</span>
+                  <span className="relative z-10 flex items-center">
+                    <FaArrowLeft className="mr-1.5" size={12} />
+                    Home
+                  </span>
                 </Link>
-                <div className="h-8 w-px bg-gradient-to-b from-gray-300 to-gray-400 opacity-60" />
-                <motion.h1 
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                  className="text-4xl font-bold bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent drop-shadow-sm"
+
+                <Link
+                  href="/events"
+                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
                 >
-                  About Us
-                </motion.h1>
+                  <span className="relative z-10">Events</span>
+                </Link>
+
+                <Link
+                  href="/team"
+                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                >
+                  <span className="relative z-10">Team</span>
+                </Link>
+
+                <Link
+                  href="/videos"
+                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                >
+                  <span className="relative z-10">Videos</span>
+                </Link>
               </div>
             </div>
           </div>
-        </motion.header>
+        </div>
 
         {/* Main content */}
         <motion.main
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
-          className="container mx-auto px-4 py-12"
+          className="container mx-auto px-4 py-8"
         >
           {/* Hero section with logo */}
           <motion.div 
@@ -178,19 +228,19 @@ export default function AboutPage() {
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               <div>
-                <p className="text-3xl font-bold text-orange-500">50+</p>
+                <p className="text-3xl font-bold text-[#FBBC04]">50+</p>
                 <p className="text-gray-600">Active Members</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-blue-500">20+</p>
+                <p className="text-3xl font-bold text-[#4285F4]">20+</p>
                 <p className="text-gray-600">Events Organized</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-green-500">100+</p>
+                <p className="text-3xl font-bold text-[#34A853]">100+</p>
                 <p className="text-gray-600">Workshop Hours</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-red-500">500+</p>
+                <p className="text-3xl font-bold text-[#EA4335]">500+</p>
                 <p className="text-gray-600">Students Reached</p>
               </div>
             </div>
