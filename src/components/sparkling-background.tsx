@@ -315,6 +315,7 @@ const SparklingBackground: React.FC = () => {
           ctx.strokeStyle = this.color;
           ctx.lineWidth = this.size;
           ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
           
           // Arrow head size matches line radius
           const headSize = this.size;
@@ -331,14 +332,10 @@ const SparklingBackground: React.FC = () => {
           ctx.translate(headX, headY);
           ctx.rotate(angle);
           
-          // Draw arrow with strokes instead of fill
+          // Draw arrow with a single path to avoid overlapping
           ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.lineTo(-headSize * 1.5, -headSize * 0.8);
-          ctx.stroke();
-          
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
+          ctx.moveTo(-headSize * 1.5, -headSize * 0.8);
+          ctx.lineTo(0, 0);
           ctx.lineTo(-headSize * 1.5, headSize * 0.8);
           ctx.stroke();
           

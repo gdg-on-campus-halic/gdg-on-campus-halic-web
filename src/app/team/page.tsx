@@ -84,11 +84,10 @@ export default function TeamPage() {
             <div className="flex gap-2 p-2">
               <Link
                 href="/"
-                className="group relative px-6 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm overflow-hidden border border-gray-100"
+                className="group relative px-4 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm overflow-hidden border border-gray-100 flex items-center justify-center"
               >
                 <span className="relative z-10 flex items-center">
-                  <FaArrowLeft className="mr-2" size={14} />
-                  Home
+                  <FaArrowLeft size={14} />
                 </span>
                 <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
               </Link>
@@ -125,31 +124,30 @@ export default function TeamPage() {
               <div className="flex gap-2 px-2">
                 <Link
                   href="/"
-                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                  className="group relative px-5 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap flex items-center justify-center"
                 >
                   <span className="relative z-10 flex items-center">
-                    <FaArrowLeft className="mr-1.5" size={12} />
-                    Home
+                    <FaArrowLeft size={12} />
                   </span>
                 </Link>
 
                 <Link
                   href="/events"
-                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                  className="group relative px-5 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
                 >
                   <span className="relative z-10">Events</span>
                 </Link>
 
                 <Link
                   href="/videos"
-                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                  className="group relative px-5 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
                 >
                   <span className="relative z-10">Videos</span>
                 </Link>
 
                 <Link
                   href="/about"
-                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                  className="group relative px-5 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
                 >
                   <span className="relative z-10">About</span>
                 </Link>
@@ -317,7 +315,7 @@ export default function TeamPage() {
                 )}
               </div>
 
-              {/* Join the team CTA */}
+              {/* Join the team CTA - Updated with blue color */}
               <motion.div 
                 variants={fadeIn}
                 className="text-center py-12 backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-2xl mt-16 border border-white/20"
@@ -333,7 +331,7 @@ export default function TeamPage() {
                   href="https://linktr.ee/GDGonCampusHalic"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-8 py-3 bg-[#4285F4] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                  className="inline-block px-8 py-3 bg-[#4285F4] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 hover:bg-[#357AE8]"
                 >
                   Apply Now
                 </a>

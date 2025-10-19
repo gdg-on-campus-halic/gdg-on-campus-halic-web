@@ -2,7 +2,7 @@
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 import Link from 'next/link';
-import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa';
 
 interface EventCardProps {
   bannerImage: StaticImageData;
@@ -26,69 +26,68 @@ const EventCard: React.FC<EventCardProps> = ({
   return (
     <Link 
       href={`/${slug}`} 
-      className="block max-w-sm w-full transform transition-all duration-300 hover:-translate-y-2 hover:scale-105 group"
+      className="block max-w-sm w-full active:scale-95 transition-transform duration-150"
     >
-      <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl bg-white border border-gray-100 transition-all duration-300">
-        {/* Image container with overlay effect */}
-        <div className="relative h-48 w-full overflow-hidden">
+      <div className="rounded-xl overflow-hidden bg-white border border-gray-100 shadow-md transition-shadow duration-300 active:shadow-sm">
+        
+        {/* Image container - no hover effects */}
+        <div className="relative h-48 w-full overflow-hidden bg-gray-100">
           <Image 
             src={bannerImage} 
             alt={title} 
             layout="fill" 
             objectFit="cover" 
-            className="w-full h-full transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-full"
           />
-          {/* Gradient overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
-          {/* Status badge */}
+          {/* Simple status badge - top right corner */}
           {isUpcoming ? (
-            <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-[#34A853] to-[#4285F4] text-white rounded-full text-xs font-semibold animate-pulse shadow-lg">
-              Upcoming Event
+            <div className="absolute top-3 right-3 px-3 py-1 bg-[#34A853] text-white rounded-full text-xs font-semibold shadow-md">
+              Upcoming
             </div>
           ) : date ? (
-            <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-gray-700 shadow-md">
+            <div className="absolute top-3 right-3 px-3 py-1 bg-white/95 backdrop-blur-sm rounded-full text-xs font-semibold text-gray-700 shadow-md">
               Past Event
             </div>
           ) : null}
         </div>
         
-        {/* Content section */}
+        {/* Content section - clean and organized */}
         <div className="p-5">
-          {/* Title with gradient on hover - triggers on card hover */}
-          <h2 className="text-xl font-bold text-gray-900 mb-2 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-[#4285F4] group-hover:via-[#34A853] group-hover:to-[#EA4335] group-hover:bg-clip-text group-hover:text-transparent">
+          {/* Title - no hover effect */}
+          <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
             {title}
           </h2>
           
-          {/* Description */}
+          {/* Description - clean and readable */}
           <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
             {description}
           </p>
           
-          {/* Event details */}
-          <div className="space-y-2 text-xs text-gray-500">
-            {date && (
-              <div className="flex items-center space-x-2">
-                <FaCalendarAlt className="text-[#FBBC04]" />
-                <span>{date}</span>
-              </div>
-            )}
-            {location && (
-              <div className="flex items-center space-x-2">
-                <FaMapMarkerAlt className="text-[#EA4335]" />
-                <span className="truncate">{location}</span>
-              </div>
-            )}
-          </div>
+          {/* Event details - organized with icons */}
+          {(date || location) && (
+            <div className="space-y-2 mb-4 pb-4 border-b border-gray-100">
+              {date && (
+                <div className="flex items-center space-x-2 text-xs text-gray-500">
+                  <FaCalendarAlt className="text-[#4285F4] flex-shrink-0" size={12} />
+                  <span>{date}</span>
+                </div>
+              )}
+              {location && (
+                <div className="flex items-center space-x-2 text-xs text-gray-500">
+                  <FaMapMarkerAlt className="text-[#EA4335] flex-shrink-0" size={12} />
+                  <span className="truncate">{location}</span>
+                </div>
+              )}
+            </div>
+          )}
           
-          {/* Call to action - now animates on card hover */}
-          <div className="mt-4 flex items-center font-semibold text-sm overflow-hidden">
-            <span className="bg-gradient-to-r from-[#4285F4] to-[#34A853] bg-clip-text text-transparent group-hover:from-[#EA4335] group-hover:to-[#FBBC04] transition-all duration-300">
+          {/* Call to action - simple and clean, no hover effects */}
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-semibold text-[#4285F4]">
               View Details
             </span>
-            <span className="ml-1 opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0 transition-all duration-300 text-[#4285F4]">
-              &rarr;
-            </span>
+            <FaArrowRight className="text-[#4285F4]" size={14} />
           </div>
         </div>
       </div>

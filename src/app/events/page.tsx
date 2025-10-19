@@ -71,11 +71,10 @@ export default function EventsPage() {
             <div className="flex gap-2 p-2">
               <Link
                 href="/"
-                className="group relative px-6 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm overflow-hidden border border-gray-100"
+                className="group relative px-4 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 text-sm overflow-hidden border border-gray-100 flex items-center justify-center"
               >
                 <span className="relative z-10 flex items-center">
-                  <FaArrowLeft className="mr-2" size={14} />
-                  Home
+                  <FaArrowLeft size={14} />
                 </span>
                 <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
               </Link>
@@ -112,31 +111,30 @@ export default function EventsPage() {
               <div className="flex gap-2 px-2">
                 <Link
                   href="/"
-                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                  className="group relative px-5 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap flex items-center justify-center"
                 >
                   <span className="relative z-10 flex items-center">
-                    <FaArrowLeft className="mr-1.5" size={12} />
-                    Home
+                    <FaArrowLeft size={12} />
                   </span>
                 </Link>
 
                 <Link
                   href="/team"
-                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                  className="group relative px-5 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
                 >
                   <span className="relative z-10">Team</span>
                 </Link>
 
                 <Link
                   href="/videos"
-                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                  className="group relative px-5 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
                 >
                   <span className="relative z-10">Videos</span>
                 </Link>
 
                 <Link
                   href="/about"
-                  className="group relative px-4 py-2 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
+                  className="group relative px-5 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md text-xs overflow-hidden border border-gray-100 whitespace-nowrap"
                 >
                   <span className="relative z-10">About</span>
                 </Link>
@@ -207,7 +205,7 @@ export default function EventsPage() {
             </motion.div>
           )}
 
-          {/* Call to action */}
+          {/* Call to action - Updated with green color */}
           <motion.div 
             variants={fadeIn}
             className="text-center mt-16 py-12 backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-2xl border border-white/20"
@@ -221,10 +219,9 @@ export default function EventsPage() {
             </p>
             <a
               href="mailto:gdg@halic.edu.tr"
-              className="group relative px-8 py-3 bg-white text-gray-900 font-semibold rounded-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.5),_0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.7),_0_15px_40px_rgba(0,0,0,0.3)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 border border-white overflow-hidden inline-block"
+              className="group relative px-8 py-3 bg-[#34A853] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-transparent overflow-hidden inline-block hover:bg-[#2D9348]"
             >
               <span className="relative z-10">Contact Us</span>
-              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none" />
             </a>
           </motion.div>
         </motion.main>
