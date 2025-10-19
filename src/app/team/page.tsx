@@ -5,11 +5,42 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import TeamMemberCard from "@/components/team-member-card";
-import { teamMembers } from "@/data/team";
 import SparklingBackground from "@/components/sparkling-background";
 import placeholderAvatar from "@/images/team/placeholderAvatar.png";
+import { useEffect, useState } from "react";
+import { TeamMember } from "@/lib/types";
+import { getTeamMembersByVariant } from "@/lib/contentful-data";
 
 export default function TeamPage() {
+  // State to hold team members grouped by variant
+  const [teamGroups, setTeamGroups] = useState<Record<string, TeamMember[]>>({
+    yellow: [],
+    green: [],
+    red: [],
+    blue: [],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch team members when component mounts
+  useEffect(() => {
+    async function loadTeamMembers() {
+      try {
+        setLoading(true);
+        const grouped = await getTeamMembersByVariant();
+        setTeamGroups(grouped);
+        setError(null);
+      } catch (err) {
+        console.error('Error loading team members:', err);
+        setError('Failed to load team members. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTeamMembers();
+  }, []);
+
   // Animation variants with faster transitions
   const fadeIn = {
     hidden: { opacity: 0, y: 10 },
@@ -17,7 +48,7 @@ export default function TeamPage() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.3, // Reduced from 0.6
+        duration: 0.3,
         ease: "easeOut"
       }
     }
@@ -28,17 +59,17 @@ export default function TeamPage() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.03, // Reduced from 0.05
-        delayChildren: 0.1 // Reduced from 0.2
+        staggerChildren: 0.03,
+        delayChildren: 0.1
       }
     }
   };
 
-  // Group team members by their role/team
-  const leadership = teamMembers.filter(m => m.variant === 'yellow');
-  const organizationTeam = teamMembers.filter(m => m.variant === 'green');
-  const projectTeam = teamMembers.filter(m => m.variant === 'red');
-  const socialMediaTeam = teamMembers.filter(m => m.variant === 'blue');
+  // Extract team groups for easier access
+  const leadership = teamGroups.yellow || [];
+  const organizationTeam = teamGroups.green || [];
+  const projectTeam = teamGroups.red || [];
+  const socialMediaTeam = teamGroups.blue || [];
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -46,7 +77,7 @@ export default function TeamPage() {
       <SparklingBackground />
       
       <div className="relative z-10">
-        {/* Compact navigation bar - no animations, transparent background */}
+        {/* Navigation bar */}
         <div className="container mx-auto px-4 pt-4">
           {/* Desktop Navigation */}
           <div className="hidden md:flex justify-center items-center mb-6">
@@ -88,7 +119,7 @@ export default function TeamPage() {
             </div>
           </div>
 
-          {/* Mobile Navigation - Centered with scrollable overflow */}
+          {/* Mobile Navigation */}
           <div className="md:hidden flex justify-center items-center mb-6">
             <div className="overflow-x-auto max-w-full">
               <div className="flex gap-2 px-2">
@@ -154,122 +185,161 @@ export default function TeamPage() {
             </p>
           </motion.div>
 
-          {/* Leadership section */}
-          <section className="mb-16">
-            <h3 className="text-2xl font-bold text-center mb-8 text-gray-800">
-              Leadership
-            </h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {leadership.map((member, index) => (
-                <TeamMemberCard
-                  key={index}
-                  avatar={member.avatar || placeholderAvatar}
-                  name={member.name}
-                  surname={member.surname}
-                  title={member.title}
-                  variant={member.variant}
-                  linkedinUrl={member.linkedinUrl}
-                  instagramUsername={member.instagramUsername}
-                  githubUsername={member.githubUsername}
-                />
-              ))}
+          {/* Loading state */}
+          {loading && (
+            <div className="text-center py-16">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <p className="mt-4 text-gray-600">Loading team members from Contentful...</p>
             </div>
-          </section>
+          )}
 
-          {/* Three column layout for teams - responsive */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
-            
-            {/* Project Team Column */}
-            <motion.section variants={fadeIn} className="w-full">
-              <h3 className="text-xl font-bold text-center mb-6 text-gray-800 border-b-2 border-red-400 pb-2">
-                Project Team
-              </h3>
-              <div className="grid grid-cols-2 gap-3 justify-items-center">
-                {projectTeam.map((member, index) => (
-                  <motion.div key={index} variants={fadeIn}>
-                    <TeamMemberCard
-                      avatar={member.avatar || placeholderAvatar}
-                      name={member.name}
-                      surname={member.surname}
-                      title={member.title}
-                      variant={member.variant}
-                      linkedinUrl={member.linkedinUrl}
-                      instagramUsername={member.instagramUsername}
-                      githubUsername={member.githubUsername}
-                    />
-                  </motion.div>
-                ))}
+          {/* Error state */}
+          {error && !loading && (
+            <div className="text-center py-16">
+              <div className="text-red-600 mb-4">
+                <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
-            </motion.section>
+              <p className="text-gray-800 font-semibold mb-2">{error}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Retry
+              </button>
+            </div>
+          )}
 
-            {/* Organization Team Column */}
-            <motion.section variants={fadeIn} className="w-full">
-              <h3 className="text-xl font-bold text-center mb-6 text-gray-800 border-b-2 border-green-400 pb-2">
-                Organization Team
-              </h3>
-              <div className="grid grid-cols-2 gap-3 justify-items-center">
-                {organizationTeam.map((member, index) => (
-                  <motion.div key={index} variants={fadeIn}>
-                    <TeamMemberCard
-                      avatar={member.avatar || placeholderAvatar}
-                      name={member.name}
-                      surname={member.surname}
-                      title={member.title}
-                      variant={member.variant}
-                      linkedinUrl={member.linkedinUrl}
-                      instagramUsername={member.instagramUsername}
-                      githubUsername={member.githubUsername}
-                    />
-                  </motion.div>
-                ))}
+          {/* Team sections */}
+          {!loading && !error && (
+            <>
+              {/* Leadership section */}
+              {leadership.length > 0 && (
+                <section className="mb-16">
+                  <h3 className="text-2xl font-bold text-center mb-8 text-gray-800">
+                    Leadership
+                  </h3>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {leadership.map((member, index) => (
+                      <TeamMemberCard
+                        key={index}
+                        avatar={member.avatar || placeholderAvatar}
+                        name={member.name}
+                        surname={member.surname}
+                        title={member.title}
+                        variant={member.variant}
+                        linkedinUrl={member.linkedinUrl}
+                        instagramUsername={member.instagramUsername}
+                        githubUsername={member.githubUsername}
+                      />
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Three column layout for teams - responsive */}
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
+                
+                {/* Project Team Column */}
+                {projectTeam.length > 0 && (
+                  <motion.section variants={fadeIn} className="w-full">
+                    <h3 className="text-xl font-bold text-center mb-6 text-gray-800 border-b-2 border-red-400 pb-2">
+                      Project Team
+                    </h3>
+                    <div className="grid grid-cols-2 gap-3 justify-items-center">
+                      {projectTeam.map((member, index) => (
+                        <motion.div key={index} variants={fadeIn}>
+                          <TeamMemberCard
+                            avatar={member.avatar || placeholderAvatar}
+                            name={member.name}
+                            surname={member.surname}
+                            title={member.title}
+                            variant={member.variant}
+                            linkedinUrl={member.linkedinUrl}
+                            instagramUsername={member.instagramUsername}
+                            githubUsername={member.githubUsername}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.section>
+                )}
+
+                {/* Organization Team Column */}
+                {organizationTeam.length > 0 && (
+                  <motion.section variants={fadeIn} className="w-full">
+                    <h3 className="text-xl font-bold text-center mb-6 text-gray-800 border-b-2 border-green-400 pb-2">
+                      Organization Team
+                    </h3>
+                    <div className="grid grid-cols-2 gap-3 justify-items-center">
+                      {organizationTeam.map((member, index) => (
+                        <motion.div key={index} variants={fadeIn}>
+                          <TeamMemberCard
+                            avatar={member.avatar || placeholderAvatar}
+                            name={member.name}
+                            surname={member.surname}
+                            title={member.title}
+                            variant={member.variant}
+                            linkedinUrl={member.linkedinUrl}
+                            instagramUsername={member.instagramUsername}
+                            githubUsername={member.githubUsername}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.section>
+                )}
+
+                {/* Social Media & Design Team Column */}
+                {socialMediaTeam.length > 0 && (
+                  <motion.section variants={fadeIn} className="w-full md:col-span-2 xl:col-span-1">
+                    <h3 className="text-xl font-bold text-center mb-6 text-gray-800 border-b-2 border-blue-400 pb-2">
+                      Social Media & Design
+                    </h3>
+                    <div className="grid grid-cols-2 gap-3 justify-items-center">
+                      {socialMediaTeam.map((member, index) => (
+                        <motion.div key={index} variants={fadeIn}>
+                          <TeamMemberCard
+                            avatar={member.avatar || placeholderAvatar}
+                            name={member.name}
+                            surname={member.surname}
+                            title={member.title}
+                            variant={member.variant}
+                            linkedinUrl={member.linkedinUrl}
+                            instagramUsername={member.instagramUsername}
+                            githubUsername={member.githubUsername}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.section>
+                )}
               </div>
-            </motion.section>
 
-            {/* Social Media & Design Team Column */}
-            <motion.section variants={fadeIn} className="w-full md:col-span-2 xl:col-span-1">
-              <h3 className="text-xl font-bold text-center mb-6 text-gray-800 border-b-2 border-blue-400 pb-2">
-                Social Media & Design
-              </h3>
-              <div className="grid grid-cols-2 gap-3 justify-items-center">
-                {socialMediaTeam.map((member, index) => (
-                  <motion.div key={index} variants={fadeIn}>
-                    <TeamMemberCard
-                      avatar={member.avatar || placeholderAvatar}
-                      name={member.name}
-                      surname={member.surname}
-                      title={member.title}
-                      variant={member.variant}
-                      linkedinUrl={member.linkedinUrl}
-                      instagramUsername={member.instagramUsername}
-                      githubUsername={member.githubUsername}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.section>
-          </div>
-
-          {/* Join the team CTA with better color */}
-          <motion.div 
-            variants={fadeIn}
-            className="text-center py-12 backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-2xl mt-16 border border-white/20"
-          >
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">
-              Want to Join Our Team?
-            </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto px-4">
-              We're always looking for passionate individuals to join our community. 
-              Whether you're interested in organizing events, building projects, or creating content, there's a place for you!
-            </p>
-            <a
-              href="https://linktr.ee/GDGonCampusHalic"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-8 py-3 bg-[#4285F4] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              Apply Now
-            </a>
-          </motion.div>
+              {/* Join the team CTA */}
+              <motion.div 
+                variants={fadeIn}
+                className="text-center py-12 backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-2xl mt-16 border border-white/20"
+              >
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  Want to Join Our Team?
+                </h3>
+                <p className="text-gray-600 mb-6 max-w-2xl mx-auto px-4">
+                  We're always looking for passionate individuals to join our community. 
+                  Whether you're interested in organizing events, building projects, or creating content, there's a place for you!
+                </p>
+                <a
+                  href="https://linktr.ee/GDGonCampusHalic"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-3 bg-[#4285F4] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                >
+                  Apply Now
+                </a>
+              </motion.div>
+            </>
+          )}
         </motion.main>
       </div>
     </div>

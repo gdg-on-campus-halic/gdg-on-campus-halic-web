@@ -8,9 +8,31 @@ import { FaInstagram, FaLinkedin, FaGithub, FaDiscord } from "react-icons/fa";
 import SparklingBackground from "@/components/sparkling-background";
 import gdgLogo from "@/images/gdglogo.png";
 import bannerImg from "@/images/banner.png";
-import { socials, joinLink } from "@/data/socials";
+import { useEffect, useState } from "react";
+import { SiteConfiguration } from "@/lib/types";
+import { getSiteConfiguration } from "@/lib/contentful-data";
 
 export default function Home() {
+  // State to hold site configuration from Contentful
+  const [config, setConfig] = useState<SiteConfiguration | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch site configuration when component mounts
+  useEffect(() => {
+    async function loadConfig() {
+      try {
+        const fetchedConfig = await getSiteConfiguration();
+        setConfig(fetchedConfig);
+      } catch (error) {
+        console.error('Error loading site configuration:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadConfig();
+  }, []);
+
   // Animation variants for staggered entrance
   const fadeInUp = {
     hidden: { 
@@ -73,11 +95,13 @@ export default function Home() {
 
   // Enhanced button styles with better design - white raised buttons
   const buttonBaseStyle = "group relative px-12 py-6 bg-white text-gray-900 font-bold rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.5),_0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.7),_0_15px_40px_rgba(0,0,0,0.3)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-2xl min-w-[240px] text-center overflow-hidden border border-white";
-  
-  // Google colors gradient for join button - clean and modern approach
-  const joinButtonStyle = "px-14 py-6 font-bold rounded-full shadow-2xl text-2xl text-white";
-  const googleGradient = "bg-gradient-to-r from-blue-500 via-red-500 to-yellow-400";
-  const googleGradientAlt = "bg-gradient-to-r from-yellow-400 via-green-500 to-blue-500";
+
+  // Default values in case config is not loaded yet
+  const joinLink = config?.joinLink || "https://linktr.ee/GDGonCampusHalic";
+  const instagramUrl = config?.instagramUrl || "https://instagram.com/gdgoncampushalic";
+  const linkedinUrl = config?.linkedinUrl || "https://www.linkedin.com/company/google-developer-groups-on-campus-haliç/";
+  const githubUrl = config?.githubUrl || "https://github.com/gdg-on-campus-halic";
+  const discordUrl = config?.discordUrl || "https://discord.gg/5e2SSHr9r3";
 
   return (
     <div className="relative h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
@@ -178,7 +202,7 @@ export default function Home() {
                   href={joinLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative px-14 py-6 bg-white text-gray-900 font-bold rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.5),_0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.7),_0_15px_40px_rgba(0,0,0,0.3)] transition-all duration-300 text-2xl min-w-[240px] text-center overflow-hidden inline-block border border-white"
+                  className="relative px-14 py-6 bg-white text-gray-900 font-bold rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.5),_0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.7),_0_15px_40px_rgba(0,0,0,0.3)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 text-2xl min-w-[240px] text-center overflow-hidden inline-block border border-white"
                 >
                   <span className="relative z-10">Join Our Community</span>
                   <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
@@ -395,7 +419,7 @@ export default function Home() {
               className="flex space-x-6"
             >
             <a
-              href={socials.instagram.url}
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit our Instagram page"
@@ -404,7 +428,7 @@ export default function Home() {
               <FaInstagram size={36} />
             </a>
             <a
-              href={socials.linkedin.url}
+              href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit our LinkedIn page"
@@ -413,7 +437,7 @@ export default function Home() {
               <FaLinkedin size={36} />
             </a>
             <a
-              href={socials.github.url}
+              href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit our GitHub page"
@@ -422,7 +446,7 @@ export default function Home() {
               <FaGithub size={36} />
             </a>
             <a
-              href={socials.discord.url}
+              href={discordUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Join our Discord server"
@@ -460,7 +484,7 @@ export default function Home() {
             className="flex space-x-6"
           >
             <a
-              href={socials.instagram.url}
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit our Instagram page"
@@ -469,7 +493,7 @@ export default function Home() {
               <FaInstagram size={32} />
             </a>
             <a
-              href={socials.linkedin.url}
+              href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit our LinkedIn page"
@@ -478,7 +502,7 @@ export default function Home() {
               <FaLinkedin size={32} />
             </a>
             <a
-              href={socials.github.url}
+              href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit our GitHub page"
@@ -487,7 +511,7 @@ export default function Home() {
               <FaGithub size={32} />
             </a>
             <a
-              href={socials.discord.url}
+              href={discordUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Join our Discord server"

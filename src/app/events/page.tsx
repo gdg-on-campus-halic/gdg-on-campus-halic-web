@@ -5,10 +5,36 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import EventSection from "@/components/events-section";
-import { events } from "@/data/events";
 import SparklingBackground from "@/components/sparkling-background";
+import { useEffect, useState } from "react";
+import { Event } from "@/lib/types";
+import { getEvents } from "@/lib/contentful-data";
 
 export default function EventsPage() {
+  // State to hold events fetched from Contentful
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch events when component mounts
+  useEffect(() => {
+    async function loadEvents() {
+      try {
+        setLoading(true);
+        const fetchedEvents = await getEvents();
+        setEvents(fetchedEvents);
+        setError(null);
+      } catch (err) {
+        console.error('Error loading events:', err);
+        setError('Failed to load events. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadEvents();
+  }, []);
+
   // Animation variants with faster transitions
   const fadeIn = {
     hidden: { opacity: 0, y: 10 },
@@ -16,7 +42,7 @@ export default function EventsPage() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.3, // Reduced from 0.6
+        duration: 0.3,
         ease: "easeOut"
       }
     }
@@ -27,20 +53,18 @@ export default function EventsPage() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05, // Reduced from 0.1
-        delayChildren: 0.1 // Reduced from 0.2
+        staggerChildren: 0.05,
+        delayChildren: 0.1
       }
     }
   };
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Sparkling background for consistency */}
       <SparklingBackground />
       
-      {/* Main content */}
       <div className="relative z-10">
-        {/* Compact navigation bar - no animations, transparent background */}
+        {/* Navigation bar */}
         <div className="container mx-auto px-4 pt-4">
           {/* Desktop Navigation */}
           <div className="hidden md:flex justify-center items-center mb-6">
@@ -82,7 +106,7 @@ export default function EventsPage() {
             </div>
           </div>
 
-          {/* Mobile Navigation - Centered with scrollable overflow */}
+          {/* Mobile Navigation */}
           <div className="md:hidden flex justify-center items-center mb-6">
             <div className="overflow-x-auto max-w-full">
               <div className="flex gap-2 px-2">
@@ -121,7 +145,7 @@ export default function EventsPage() {
           </div>
         </div>
 
-        {/* Page content */}
+        {/* Main content */}
         <motion.main
           initial="hidden"
           animate="visible"
@@ -150,10 +174,38 @@ export default function EventsPage() {
             </p>
           </motion.div>
 
+          {/* Loading state */}
+          {loading && (
+            <div className="text-center py-16">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <p className="mt-4 text-gray-600">Loading events from Contentful...</p>
+            </div>
+          )}
+
+          {/* Error state */}
+          {error && !loading && (
+            <div className="text-center py-16">
+              <div className="text-red-600 mb-4">
+                <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p className="text-gray-800 font-semibold mb-2">{error}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Retry
+              </button>
+            </div>
+          )}
+
           {/* Events grid section */}
-          <motion.div variants={fadeIn}>
-            <EventSection events={events} />
-          </motion.div>
+          {!loading && !error && (
+            <motion.div variants={fadeIn}>
+              <EventSection events={events} />
+            </motion.div>
+          )}
 
           {/* Call to action */}
           <motion.div 

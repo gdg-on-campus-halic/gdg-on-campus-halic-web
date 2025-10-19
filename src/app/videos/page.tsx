@@ -5,10 +5,36 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaArrowLeft, FaYoutube } from "react-icons/fa";
 import VideoGrid from "@/components/video-grid";
-import { videos } from "@/data/video";
 import SparklingBackground from "@/components/sparkling-background";
+import { useEffect, useState } from "react";
+import { Video } from "@/lib/types";
+import { getVideos } from "@/lib/contentful-data";
 
 export default function VideosPage() {
+  // State to hold videos fetched from Contentful
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch videos when component mounts
+  useEffect(() => {
+    async function loadVideos() {
+      try {
+        setLoading(true);
+        const fetchedVideos = await getVideos();
+        setVideos(fetchedVideos);
+        setError(null);
+      } catch (err) {
+        console.error('Error loading videos:', err);
+        setError('Failed to load videos. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadVideos();
+  }, []);
+
   // Animation variants with faster transitions
   const fadeIn = {
     hidden: { opacity: 0, y: 10 },
@@ -16,7 +42,7 @@ export default function VideosPage() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.3, // Reduced from 0.6
+        duration: 0.3,
         ease: "easeOut"
       }
     }
@@ -27,8 +53,8 @@ export default function VideosPage() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05, // Reduced from 0.1
-        delayChildren: 0.1 // Reduced from 0.2
+        staggerChildren: 0.05,
+        delayChildren: 0.1
       }
     }
   };
@@ -39,7 +65,7 @@ export default function VideosPage() {
       <SparklingBackground />
       
       <div className="relative z-10">
-        {/* Compact navigation bar - no animations, transparent background */}
+        {/* Navigation bar */}
         <div className="container mx-auto px-4 pt-4">
           {/* Desktop Navigation */}
           <div className="hidden md:flex justify-center items-center mb-6">
@@ -81,7 +107,7 @@ export default function VideosPage() {
             </div>
           </div>
 
-          {/* Mobile Navigation - Centered with scrollable overflow */}
+          {/* Mobile Navigation */}
           <div className="md:hidden flex justify-center items-center mb-6">
             <div className="overflow-x-auto max-w-full">
               <div className="flex gap-2 px-2">
@@ -149,38 +175,68 @@ export default function VideosPage() {
             </p>
           </motion.div>
 
-          {/* Video grid */}
-          <motion.div 
-            variants={fadeIn}
-            className="mb-12"
-          >
-            <VideoGrid videos={videos} />
-          </motion.div>
-
-          {/* YouTube channel promotion with better CTA */}
-          <motion.div 
-            variants={fadeIn}
-            className="text-center py-12 backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-2xl border border-white/20"
-          >
-            <div className="flex justify-center mb-4">
-              <FaYoutube size={48} className="text-[#EA4335]" />
+          {/* Loading state */}
+          {loading && (
+            <div className="text-center py-16">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <p className="mt-4 text-gray-600">Loading videos from Contentful...</p>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">
-              Subscribe to Our YouTube Channel
-            </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Don't miss out on our latest workshops, tutorials, and tech talks. 
-              Subscribe to get notified when we upload new content!
-            </p>
-            <a
-              href="https://www.youtube.com/@GDGonCampusHalic"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-8 py-3 bg-[#EA4335] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              Subscribe Now
-            </a>
-          </motion.div>
+          )}
+
+          {/* Error state */}
+          {error && !loading && (
+            <div className="text-center py-16">
+              <div className="text-red-600 mb-4">
+                <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <p className="text-gray-800 font-semibold mb-2">{error}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Retry
+              </button>
+            </div>
+          )}
+
+          {/* Video grid */}
+          {!loading && !error && (
+            <>
+              <motion.div 
+                variants={fadeIn}
+                className="mb-12"
+              >
+                <VideoGrid videos={videos} />
+              </motion.div>
+
+              {/* YouTube channel promotion */}
+              <motion.div 
+                variants={fadeIn}
+                className="text-center py-12 backdrop-blur-xl bg-white/90 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-2xl border border-white/20"
+              >
+                <div className="flex justify-center mb-4">
+                  <FaYoutube size={48} className="text-[#EA4335]" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  Subscribe to Our YouTube Channel
+                </h3>
+                <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                  Don't miss out on our latest workshops, tutorials, and tech talks. 
+                  Subscribe to get notified when we upload new content!
+                </p>
+                <a
+                  href="https://www.youtube.com/@GDGonCampusHalic"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-3 bg-[#EA4335] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                >
+                  Subscribe Now
+                </a>
+              </motion.div>
+            </>
+          )}
         </motion.main>
       </div>
     </div>
