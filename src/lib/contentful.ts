@@ -1,19 +1,22 @@
 // src/lib/contentful.ts
-// This file sets up the Contentful client to fetch data from our CMS
+// This file sets up the Contentful client for SERVER-SIDE use only
+// ⚠️ IMPORTANT: This file should ONLY be imported in API routes (app/api/**/route.ts)
+// ⚠️ NEVER import this file in client components - use the API routes instead!
 
 import { createClient, EntryFieldTypes } from 'contentful';
 
 // Check if environment variables are set
-if (!process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID) {
-  throw new Error('NEXT_PUBLIC_CONTENTFUL_SPACE_ID is not set');
+// Note: We removed NEXT_PUBLIC_ prefix to keep credentials server-side only
+if (!process.env.CONTENTFUL_SPACE_ID) {
+  throw new Error('CONTENTFUL_SPACE_ID is not set in environment variables');
 }
 
-if (!process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN) {
-  throw new Error('NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN is not set');
+if (!process.env.CONTENTFUL_ACCESS_TOKEN) {
+  throw new Error('CONTENTFUL_ACCESS_TOKEN is not set in environment variables');
 }
 
 // Define the skeleton types for Contentful entries
-// This helps TypeScript understand the structure of data coming from Contentful
+// These types help TypeScript understand the structure of data coming from Contentful
 
 export interface EventFields {
   title: EntryFieldTypes.Text;
@@ -60,15 +63,30 @@ export interface AboutSectionFields {
 }
 
 // Create and export the Contentful client
-// This client will be used throughout the app to fetch data
+// ⚠️ This client can ONLY be used in API routes (server-side)
+// The credentials are NOT exposed to the browser
 export const contentfulClient = createClient({
-  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
+  space: process.env.CONTENTFUL_SPACE_ID!,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
 });
 
 // Optional: Create a preview client for draft content
-export const previewClient = createClient({
-  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW_ACCESS_TOKEN || '',
-  host: 'preview.contentful.com',
-});
+// Only initialize if preview token is provided
+export const previewClient = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+  ? createClient({
+      space: process.env.CONTENTFUL_SPACE_ID!,
+      accessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN!,
+      host: 'preview.contentful.com',
+    })
+  : null;
+
+/**
+ * Helper function to choose between preview and production client
+ * Useful for implementing preview mode in your application
+ */
+export function getContentfulClient(preview: boolean = false) {
+  if (preview && previewClient) {
+    return previewClient;
+  }
+  return contentfulClient;
+}

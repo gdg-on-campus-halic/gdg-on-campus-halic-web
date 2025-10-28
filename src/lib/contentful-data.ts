@@ -1,6 +1,7 @@
 // src/lib/contentful-data.ts
-// Unified data layer - combines API calls with data transformation
-// This is the main file you'll import in your components
+// Updated data layer that uses secure API routes instead of direct Contentful calls
+// Simply replace the import in this file and your entire app becomes secure!
+// This is the magic layer that makes the security upgrade seamless
 
 import {
   fetchEvents,
@@ -11,7 +12,7 @@ import {
   fetchVideos,
   fetchSiteConfiguration,
   fetchAboutSections,
-} from './contentful-api';
+} from './secure-api'; // ← Changed from './contentful-api' to './secure-api'
 
 import {
   transformContentfulEvents,
@@ -24,23 +25,23 @@ import {
 import { Event, TeamMember, Video, SiteConfiguration, AboutSection } from './types';
 
 // ============================================
-// EVENTS
+// EVENTS - Now Secure!
 // ============================================
 
 /**
  * Gets all events, optionally filtered by term
- * Includes caching to improve performance
+ * Now fetches through secure API routes
  */
 export async function getEvents(term?: string): Promise<Event[]> {
   const cacheKey = `events-${term || 'all'}`;
   
-  // Check cache first
+  // Check cache first to reduce API calls
   const cached = getFromCache(cacheKey);
   if (cached) {
     return cached;
   }
 
-  // Fetch from Contentful
+  // Fetch through secure API route
   const entries = await fetchEvents(term);
   const events = transformContentfulEvents(entries);
   
@@ -52,6 +53,7 @@ export async function getEvents(term?: string): Promise<Event[]> {
 
 /**
  * Gets a single event by slug
+ * Now fetches through secure API routes
  */
 export async function getEventBySlug(slug: string): Promise<Event | null> {
   const cacheKey = `event-${slug}`;
@@ -61,6 +63,7 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
     return cached;
   }
 
+  // Fetch through secure API route
   const entry = await fetchEventBySlug(slug);
   
   if (!entry) {
@@ -75,6 +78,7 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
 
 /**
  * Gets all available event terms (academic years)
+ * Now fetches through secure API routes
  */
 export async function getEventTerms(): Promise<string[]> {
   const cacheKey = 'event-terms';
@@ -91,11 +95,12 @@ export async function getEventTerms(): Promise<string[]> {
 }
 
 // ============================================
-// TEAM MEMBERS
+// TEAM MEMBERS - Now Secure!
 // ============================================
 
 /**
  * Gets all team members, optionally filtered by variant
+ * Now fetches through secure API routes
  */
 export async function getTeamMembers(variant?: string): Promise<TeamMember[]> {
   const cacheKey = `team-members-${variant || 'all'}`;
@@ -115,7 +120,7 @@ export async function getTeamMembers(variant?: string): Promise<TeamMember[]> {
 
 /**
  * Gets team members grouped by variant (color/team)
- * Returns an object with keys: yellow, green, red, blue
+ * Now fetches through secure API routes
  */
 export async function getTeamMembersByVariant(): Promise<Record<string, TeamMember[]>> {
   const cacheKey = 'team-members-grouped';
@@ -141,11 +146,12 @@ export async function getTeamMembersByVariant(): Promise<Record<string, TeamMemb
 }
 
 // ============================================
-// VIDEOS
+// VIDEOS - Now Secure!
 // ============================================
 
 /**
  * Gets all videos
+ * Now fetches through secure API routes
  */
 export async function getVideos(): Promise<Video[]> {
   const cacheKey = 'videos';
@@ -157,7 +163,7 @@ export async function getVideos(): Promise<Video[]> {
 
   const entries = await fetchVideos();
   
-  // Videos don't need transformation - they're already in the right format
+  // Transform to our Video type
   const videos = entries.map(entry => ({
     url: entry.fields.url,
     title: entry.fields.title,
@@ -169,11 +175,12 @@ export async function getVideos(): Promise<Video[]> {
 }
 
 // ============================================
-// SITE CONFIGURATION
+// SITE CONFIGURATION - Now Secure!
 // ============================================
 
 /**
  * Gets site configuration (social links, campus name, etc.)
+ * Now fetches through secure API routes
  */
 export async function getSiteConfiguration(): Promise<SiteConfiguration | null> {
   const cacheKey = 'site-config';
@@ -204,11 +211,12 @@ export async function getSiteConfiguration(): Promise<SiteConfiguration | null> 
 }
 
 // ============================================
-// ABOUT SECTIONS
+// ABOUT SECTIONS - Now Secure!
 // ============================================
 
 /**
  * Gets all about sections, sorted by order
+ * Now fetches through secure API routes
  */
 export async function getAboutSections(): Promise<AboutSection[]> {
   const cacheKey = 'about-sections';
