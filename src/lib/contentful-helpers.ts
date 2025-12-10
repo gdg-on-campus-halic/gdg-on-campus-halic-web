@@ -1,7 +1,7 @@
 // src/lib/contentful-helpers.ts
 // Helper functions to transform Contentful data into formats our components expect
 
-import { Asset } from 'contentful';
+import { Asset, AssetFile, AssetDetails } from 'contentful';
 import { Event, TeamMember } from './types';
 import { EventEntry, TeamMemberEntry } from './contentful-api';
 
@@ -22,7 +22,10 @@ export function getImageUrl(asset: Asset | undefined): string {
   
   // Contentful URLs don't include the protocol, so we add https:
   const url = asset.fields.file.url;
-  return url.startsWith('//') ? `https:${url}` : url;
+  if (typeof url === 'string') {
+    return url.startsWith('//') ? `https:${url}` : url;
+  }
+  return '';
 }
 
 /**
@@ -56,11 +59,11 @@ export function createImageObject(asset: Asset | undefined) {
   }
 
   const url = asset.fields.file.url;
-  const imageUrl = url.startsWith('//') ? `https:${url}` : url;
+  const imageUrl = typeof url === 'string' ? (url.startsWith('//') ? `https:${url}` : url) : '/placeholder.png';
   
   // Extract dimensions from the asset details
   const details = asset.fields.file.details;
-  const image = details?.image;
+  const image = details && 'image' in details ? details.image : undefined;
   
   return {
     src: imageUrl,
@@ -84,13 +87,13 @@ export function transformContentfulEvent(entry: EventEntry): Event {
   const fields = entry.fields;
   
   return {
-    title: fields.title || '',
-    slug: fields.slug || '',
-    description: fields.description || '',
-    text: fields.text || '',
-    date: fields.date || '',
-    term: fields.term || '',
-    location: fields.location || '',
+    title: typeof fields.title === 'string' ? fields.title : '',
+    slug: typeof fields.slug === 'string' ? fields.slug : '',
+    description: typeof fields.description === 'string' ? fields.description : '',
+    text: typeof fields.text === 'string' ? fields.text : '',
+    date: typeof fields.date === 'string' ? fields.date : '',
+    term: typeof fields.term === 'string' ? fields.term : '',
+    location: typeof fields.location === 'string' ? fields.location : '',
     // Pass the entire Asset object to extract dimensions properly
     bannerImage: createImageObject(fields.bannerImage as Asset),
     images: ((fields.galleryImages as Asset[]) || []).map(asset => 
@@ -121,15 +124,15 @@ export function transformContentfulTeamMember(entry: TeamMemberEntry): TeamMembe
   const fields = entry.fields;
   
   return {
-    name: fields.name || '',
-    surname: fields.surname || '',
-    title: fields.title || '',
-    variant: (fields.variant || 'blue') as 'green' | 'blue' | 'red' | 'yellow',
+    name: typeof fields.name === 'string' ? fields.name : '',
+    surname: typeof fields.surname === 'string' ? fields.surname : '',
+    title: typeof fields.title === 'string' ? fields.title : '',
+    variant: (typeof fields.variant === 'string' ? fields.variant : 'blue') as 'green' | 'blue' | 'red' | 'yellow',
     // Pass the entire Asset object to extract dimensions properly
     avatar: fields.avatar ? createImageObject(fields.avatar as Asset) : undefined,
-    linkedinUrl: fields.linkedinUrl,
-    instagramUsername: fields.instagramUsername,
-    githubUsername: fields.githubUsername,
+    linkedinUrl: typeof fields.linkedinUrl === 'string' ? fields.linkedinUrl : undefined,
+    instagramUsername: typeof fields.instagramUsername === 'string' ? fields.instagramUsername : undefined,
+    githubUsername: typeof fields.githubUsername === 'string' ? fields.githubUsername : undefined,
   };
 }
 
