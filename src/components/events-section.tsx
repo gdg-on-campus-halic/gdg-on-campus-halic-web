@@ -66,7 +66,7 @@ const EventSection = ({ events }: { events: Event[] }) => {
               Exciting Events Coming Soon!
             </h3>
             <p className="text-gray-500 max-w-md mx-auto">
-              We're working on amazing workshops and events for {selectedTerm}. 
+              We&apos;re working on amazing workshops and events for {selectedTerm}. 
               Stay tuned for updates!
             </p>
           </div>

@@ -324,8 +324,8 @@ export default function TeamPage() {
                   Want to Join Our Team?
                 </h3>
                 <p className="text-gray-600 mb-6 max-w-2xl mx-auto px-4">
-                  We're always looking for passionate individuals to join our community. 
-                  Whether you're interested in organizing events, building projects, or creating content, there's a place for you!
+                  We&apos;re always looking for passionate individuals to join our community. 
+                  Whether you&apos;re interested in organizing events, building projects, or creating content, there&apos;s a place for you!
                 </p>
                 <a
                   href="https://linktr.ee/GDGonCampusHalic"

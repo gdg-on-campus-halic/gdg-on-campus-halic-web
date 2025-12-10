@@ -221,7 +221,7 @@ export default function VideosPage() {
                   Subscribe to Our YouTube Channel
                 </h3>
                 <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                  Don't miss out on our latest workshops, tutorials, and tech talks. 
+                  Don&apos;t miss out on our latest workshops, tutorials, and tech talks. 
                   Subscribe to get notified when we upload new content!
                 </p>
                 <a

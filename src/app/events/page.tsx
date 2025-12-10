@@ -214,7 +214,7 @@ export default function EventsPage() {
               Want to organize an event with us?
             </h3>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              We're always looking for passionate individuals to help organize and host events. 
+              We&apos;re always looking for passionate individuals to help organize and host events. 
               Get in touch with our team to learn more!
             </p>
             <a
