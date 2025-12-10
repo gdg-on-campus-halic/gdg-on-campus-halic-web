@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import Image from 'next/image'
 
 const getYouTubeVideoId = (url: string): string | null => {
   const patterns = [
@@ -75,10 +76,12 @@ const VideoGrid: React.FC<VideoGridProps> = ({ videos }) => {
                   className="block"
                 >
                   <div className="aspect-video relative">
-                    <img
-                      src={thumbnailUrl}
-                      alt={video.title}
-                      className="w-full h-full object-cover"
+                    <Image
+                        src={thumbnailUrl}
+                        alt={video.title}
+                        width={320}  
+                        height={180} 
+                        className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-0 transition-opacity" />
                   </div>
