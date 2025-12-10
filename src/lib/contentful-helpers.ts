@@ -1,7 +1,9 @@
 // src/lib/contentful-helpers.ts
 // Helper functions to transform Contentful data into formats our components expect
 
-import { Asset, AssetFile, AssetDetails } from 'contentful';
+import { Asset } from 'contentful';
+// Bunlar import edilip kullanılmamış!!!
+// import { AssetFile, AssetDetails } from 'contentful';
 import { Event, TeamMember } from './types';
 import { EventEntry, TeamMemberEntry } from './contentful-api';
 
