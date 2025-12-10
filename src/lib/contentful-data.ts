@@ -165,8 +165,8 @@ export async function getVideos(): Promise<Video[]> {
   
   // Transform to our Video type
   const videos = entries.map(entry => ({
-    url: entry.fields.url,
-    title: entry.fields.title,
+    url: typeof entry.fields.url === 'string' ? entry.fields.url : '',
+    title: typeof entry.fields.title === 'string' ? entry.fields.title : '',
   }));
   
   setCache(cacheKey, videos);
@@ -197,12 +197,12 @@ export async function getSiteConfiguration(): Promise<SiteConfiguration | null> 
   }
 
   const config: SiteConfiguration = {
-    campusName: entry.fields.campusName,
-    joinLink: entry.fields.joinLink,
-    instagramUrl: entry.fields.instagramUrl,
-    linkedinUrl: entry.fields.linkedinUrl,
-    githubUrl: entry.fields.githubUrl,
-    discordUrl: entry.fields.discordUrl,
+    campusName: typeof entry.fields.campusName === 'string' ? entry.fields.campusName : '',
+    joinLink: typeof entry.fields.joinLink === 'string' ? entry.fields.joinLink : '',
+    instagramUrl: typeof entry.fields.instagramUrl === 'string' ? entry.fields.instagramUrl : '',
+    linkedinUrl: typeof entry.fields.linkedinUrl === 'string' ? entry.fields.linkedinUrl : '',
+    githubUrl: typeof entry.fields.githubUrl === 'string' ? entry.fields.githubUrl : '',
+    discordUrl: typeof entry.fields.discordUrl === 'string' ? entry.fields.discordUrl : '',
   };
   
   setCache(cacheKey, config);
@@ -229,10 +229,10 @@ export async function getAboutSections(): Promise<AboutSection[]> {
   const entries = await fetchAboutSections();
   
   const sections = entries.map(entry => ({
-    sectionTitle: entry.fields.sectionTitle,
-    content: entry.fields.content,
-    iconName: entry.fields.iconName,
-    order: entry.fields.order,
+    sectionTitle: typeof entry.fields.sectionTitle === 'string' ? entry.fields.sectionTitle : '',
+    content: typeof entry.fields.content === 'string' ? entry.fields.content : '',
+    iconName: typeof entry.fields.iconName === 'string' ? entry.fields.iconName : undefined,
+    order: typeof entry.fields.order === 'number' ? entry.fields.order : 0,
   }));
   
   setCache(cacheKey, sections);
