@@ -15,7 +15,7 @@ import { getSiteConfiguration } from "@/lib/contentful-data";
 export default function Home() {
   // State to hold site configuration from Contentful
   const [config, setConfig] = useState<SiteConfiguration | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
 
   // Fetch site configuration when component mounts
   useEffect(() => {
