@@ -90,7 +90,7 @@ export async function fetchEventTerms(): Promise<string[]> {
     // Extract unique terms from the response
     const terms = new Set<string>();
     response.items.forEach(item => {
-      if (item.fields.term) {
+      if (typeof item.fields.term === 'string') {
         terms.add(item.fields.term);
       }
     });
@@ -156,7 +156,7 @@ export async function fetchTeamMembersByVariant(): Promise<Record<string, TeamMe
     };
 
     response.items.forEach(member => {
-      const variant = member.fields.variant;
+      const variant = typeof member.fields.variant === 'string' ? member.fields.variant : undefined;
       if (variant && grouped[variant]) {
         grouped[variant].push(member as TeamMemberEntry);
       }
