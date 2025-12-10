@@ -78,7 +78,7 @@ export async function fetchEventTerms(): Promise<string[]> {
     
     const terms = new Set<string>();
     events.forEach(event => {
-      if (event.fields.term) {
+      if (typeof event.fields.term === 'string') {
         terms.add(event.fields.term);
       }
     });
@@ -139,7 +139,7 @@ export async function fetchTeamMembersByVariant(): Promise<Record<string, TeamMe
     
     const members = result.data as TeamMemberEntry[];
     members.forEach(member => {
-      const variant = member.fields.variant;
+      const variant = typeof member.fields.variant === 'string' ? member.fields.variant : undefined;
       if (variant && grouped[variant]) {
         grouped[variant].push(member);
       }
