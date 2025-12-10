@@ -3,7 +3,7 @@
 // ⚠️ IMPORTANT: This file should ONLY be imported in API routes (app/api/**/route.ts)
 // ⚠️ NEVER import this file in client components - use the API routes instead!
 
-import { createClient, EntryFieldTypes } from 'contentful';
+import { createClient, EntryFieldTypes, EntrySkeletonType } from 'contentful';
 
 // Check if environment variables are set
 // Note: We removed NEXT_PUBLIC_ prefix to keep credentials server-side only
@@ -18,7 +18,7 @@ if (!process.env.CONTENTFUL_ACCESS_TOKEN) {
 // Define the skeleton types for Contentful entries
 // These types help TypeScript understand the structure of data coming from Contentful
 
-export interface EventFields {
+export interface EventFields extends EntrySkeletonType {
   title: EntryFieldTypes.Text;
   slug: EntryFieldTypes.Text;
   description: EntryFieldTypes.Text;
@@ -30,7 +30,7 @@ export interface EventFields {
   galleryImages: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
 }
 
-export interface TeamMemberFields {
+export interface TeamMemberFields extends EntrySkeletonType {
   name: EntryFieldTypes.Text;
   surname: EntryFieldTypes.Text;
   title: EntryFieldTypes.Text;
@@ -41,12 +41,12 @@ export interface TeamMemberFields {
   githubUsername?: EntryFieldTypes.Text;
 }
 
-export interface VideoFields {
+export interface VideoFields extends EntrySkeletonType {
   title: EntryFieldTypes.Text;
   url: EntryFieldTypes.Text;
 }
 
-export interface SiteConfigurationFields {
+export interface SiteConfigurationFields extends EntrySkeletonType {
   campusName: EntryFieldTypes.Text;
   joinLink: EntryFieldTypes.Text;
   instagramUrl: EntryFieldTypes.Text;
@@ -55,7 +55,7 @@ export interface SiteConfigurationFields {
   discordUrl: EntryFieldTypes.Text;
 }
 
-export interface AboutSectionFields {
+export interface AboutSectionFields extends EntrySkeletonType {
   sectionTitle: EntryFieldTypes.Text;
   content: EntryFieldTypes.Text;
   iconName?: EntryFieldTypes.Text;
