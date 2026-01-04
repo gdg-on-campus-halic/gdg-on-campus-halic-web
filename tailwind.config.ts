@@ -10,9 +10,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // Custom font family
+      // Custom font family using next/font/google CSS variable
       fontFamily: {
-        'inter': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'sans': ['var(--font-inter)', 'system-ui', '-apple-system', 'sans-serif'],
+        'inter': ['var(--font-inter)', 'system-ui', '-apple-system', 'sans-serif'],
       },
       // Extended color palette
       colors: {
