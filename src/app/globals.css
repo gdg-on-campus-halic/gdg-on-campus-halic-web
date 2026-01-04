@@ -29,7 +29,6 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
 }
 
